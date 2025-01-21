@@ -1,0 +1,90 @@
+$background-transparency: rgba(0, 0, 0, 0.2);
+$blur-value: 8px;
+
+.top-bar {
+  background-color: $background-transparency;
+  backdrop-filter: blur($blur-value);
+  padding: 4px 0;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1029;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+  }
+
+  .contact-info {
+    display: flex;
+    align-items: center;
+  }
+
+  &.scrolled {
+    background-color: var(--main-green);
+    opacity: 0.98; // Slightly more opaque than navbar
+  }
+}
+
+.info-item {
+  margin-right: 20px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+
+  i {
+    margin-right: 5px;
+    color: var(--main-green);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+
+  a {
+    color: white;
+    margin-left: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: var(--main-green);
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    .container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 15px;
+      height: auto;
+    }
+  }
+
+  .info-item {
+    font-size: 12px;
+    margin-right: 10px;
+  }
+
+  .social-icons {
+    a {
+      font-size: 14px;
+      margin-left: 12px;
+    }
+  }
+}

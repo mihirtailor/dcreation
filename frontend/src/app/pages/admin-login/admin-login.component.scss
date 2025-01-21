@@ -1,0 +1,101 @@
+.container {
+  --primary-red: #e53935;
+  --secondary-red: #ef5350;
+  --light-red: #ffcdd2;
+  --dark-red: #c62828;
+  --dark-text: #2c3e50;
+  --white: #ffffff;
+}
+
+.card {
+  border-radius: 1rem;
+  border: none;
+  background-color: var(--white);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.icon-color {
+  color: var(--primary-red);
+}
+
+.heading-color {
+  color: var(--dark-text);
+}
+
+.custom-input {
+  background-color: var(--light-red) !important;
+  border: 1px solid var(--primary-red) !important;
+  color: var(--dark-text) !important;
+}
+
+.input-group-text {
+  border-right: none;
+  color: var(--primary-red);
+  background-color: var(--light-red);
+}
+
+.form-control {
+  border-left: none;
+  &:focus {
+    box-shadow: none;
+    border-color: var(--primary-red);
+    background-color: var(--light-red);
+  }
+}
+
+.custom-btn {
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background-color: var(--primary-red) !important;
+  border: none;
+  color: var(--white) !important;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: var(--dark-red) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.input-group:focus-within {
+  .input-group-text,
+  .form-control {
+    border-color: var(--primary-red);
+  }
+}
+
+.alert-danger {
+  background-color: var(--dark-red);
+  color: var(--white);
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.text-danger {
+  color: var(--primary-red) !important;
+}
+
+// Additional hover effects
+.input-group:hover {
+  .input-group-text,
+  .form-control {
+    background-color: var(--light-red);
+    transition: background-color 0.3s ease;
+  }
+}
+
+// Focus styles
+.form-control:focus {
+  background-color: var(--light-red);
+  border-color: var(--primary-red);
+  box-shadow: none;
+}
+
+// Smooth transitions
+.input-group-text,
+.form-control,
+.custom-btn {
+  transition: all 0.3s ease;
+}
