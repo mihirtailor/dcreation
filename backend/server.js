@@ -23,6 +23,9 @@ app.get("/admin", verifyUser, (req, res) => {
 // Use the authentication routes
 app.use("/api", authRoutes);
 
+const uploadRoutes = require("./routes/upload");
+app.use("/api", uploadRoutes);
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

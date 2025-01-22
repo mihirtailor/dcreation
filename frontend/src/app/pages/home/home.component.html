@@ -1,33 +1,11 @@
 <section class="hero-section">
   <div class="slider">
     <div class="list" #sliderList>
-      <div class="item">
-        <img src="assets/images/hero/slide1.jpg" alt="" />
+      <div class="item" *ngFor="let item of sliderItems">
+        <img [src]="item.image_url" [alt]="item.title" />
         <div class="content">
-          <h2>Welcome to DCreation</h2>
-          <p>Discover our unique designs</p>
-          <div class="button-group">
-            <button class="cta-button outline">Contact Us</button>
-            <button class="cta-button outline">Portfolio</button>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <img src="assets/images/hero/slide2.jpg" alt="" />
-        <div class="content">
-          <h2>Handcrafted Excellence</h2>
-          <p>Each piece tells a story</p>
-          <div class="button-group">
-            <button class="cta-button outline">Contact Us</button>
-            <button class="cta-button outline">Portfolio</button>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <img src="assets/images/hero/slide3.jpg" alt="" />
-        <div class="content">
-          <h2>Premium Quality</h2>
-          <p>Crafted with passion</p>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
           <div
             class="button-group"
             (mouseenter)="onSliderMouseEnter()"
@@ -44,9 +22,11 @@
       <button (click)="next()">></button>
     </div>
     <ul class="dots">
-      <li [class.active]="active === 0" (click)="setActive(0)"></li>
-      <li [class.active]="active === 1" (click)="setActive(1)"></li>
-      <li [class.active]="active === 2" (click)="setActive(2)"></li>
+      <li
+        *ngFor="let item of sliderItems; let i = index"
+        [class.active]="active === i"
+        (click)="setActive(i)"
+      ></li>
     </ul>
   </div>
 </section>

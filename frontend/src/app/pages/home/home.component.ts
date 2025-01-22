@@ -8,8 +8,10 @@ import {
   ElementRef,
   PLATFORM_ID,
   Inject,
+  inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { SliderService } from '../../services/slider.service';
 
 @Component({
   selector: 'app-home',
@@ -27,13 +29,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private refreshInterval: any;
   isBrowser: boolean;
   private isAnimating = false;
+  sliderItems: any[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
+  sliderService = inject(SliderService);
 
   ngOnInit() {
     if (this.isBrowser) {
+      this.loadSlides();
       this.startSliderInterval();
       this.updateActiveClass();
     }
@@ -49,6 +54,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.isBrowser) {
       clearInterval(this.refreshInterval);
     }
+  }
+
+  loadSlides() {
+    this.sliderService.getSlides().subscribe((slides) => {
+      this.sliderItems = slides;
+      this.lengthItems = this.sliderItems.length - 1;
+    });
   }
 
   next() {
