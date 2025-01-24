@@ -28,12 +28,14 @@ $blur-value: 0;
   margin: 0 0.5rem;
   font-weight: 500;
   transition: color 0.3s ease;
-  color: white !important;
+  color: #ffe4e4 !important;
   position: relative;
   padding: 0.5rem 0;
 
   &:hover {
-    color: #2e7d32 !important;
+    color: #ffe4e4 !important;
+    background-color: #800020;
+    border-radius: 4px;
   }
 }
 
@@ -48,9 +50,18 @@ $blur-value: 0;
 }
 
 .navbar.scrolled {
-  background-color: var(--main-green);
-  // Add some transparency to make it look better
+  background-color: #ffe4e4;
   opacity: 1;
+
+  .nav-link {
+    color: #800020 !important;
+
+    &:hover {
+      color: #ffe4e4 !important;
+      background-color: #800020;
+      border-radius: 4px;
+    }
+  }
 }
 
 // Mobile Responsive Styles
@@ -60,7 +71,7 @@ $blur-value: 0;
   }
 
   .navbar-collapse {
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: #ffe4e4;
     padding: 1rem;
     border-radius: 8px;
     margin-top: 0.5rem;
@@ -71,7 +82,8 @@ $blur-value: 0;
     margin: 0.25rem 0;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: #800020;
+      color: #ffe4e4 !important;
       border-radius: 4px;
     }
   }

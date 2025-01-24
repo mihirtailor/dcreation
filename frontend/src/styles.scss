@@ -1,42 +1,66 @@
-// Swiper imports
-@import "swiper/css";
-@import "swiper/css/effect-fade";
-@import "swiper/css/pagination";
-@import "swiper/css/navigation";
-
-// Root variables
+// Design Tokens
 :root {
-  // Green Theme
-  --main-green: #4caf50;
-  --secondary-green: #81c784;
-  --accent-green: #e8f5e9;
-
-  // Red Theme
-  --main-red: #f44336;
-  --secondary-red: #e57373;
-  --accent-red: #ffebee;
-
-  // Common colors
-  --background: #ffffff;
-  --text-dark: #2c3e50;
-  --text-light: #ecf0f1;
+  // Color System
+  --background-color: #ffe4e4;
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #e74c3c;
+  --text-color: #333333;
+  --light-gray: #f5f5f5;
+  --dark-gray: #666666;
 
   // Typography
+  --font-family-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-secondary: "Georgia", serif;
+
+  // Font Sizes
+  --heading-1: 3rem;
   --heading-2: 2.5rem;
   --heading-3: 2rem;
   --heading-4: 1.5rem;
   --body-text: 1rem;
   --body-text-small: 0.875rem;
+
+  // Spacing
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  // Border Radius
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
 }
 
-// Base styles
+// Reset & Base Styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--background);
+  background-color: var(--background-color);
+  font-family: var(--font-family-primary);
+  color: var(--text-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// Typography classes
+// Typography
+h1 {
+  font-size: var(--heading-1);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
 .heading-2 {
   font-size: var(--heading-2);
   font-weight: 700;
@@ -65,23 +89,38 @@ body {
   line-height: 1.5;
 }
 
-// Section styles
-.green-section {
-  background-color: var(--main-green);
-  color: var(--text-light);
+// Links
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
-.red-section {
-  background-color: var(--main-red);
-  color: var(--text-light);
+// Common utility classes
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
 }
 
-.accent-section {
-  background-color: var(--accent-green);
-  color: var(--main-green);
+.margin-top {
+  margin-top: var(--spacing-md);
+}
+.margin-bottom {
+  margin-bottom: var(--spacing-md);
 }
 
-.accent-red-section {
-  background-color: var(--accent-red);
-  color: var(--main-red);
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
 }

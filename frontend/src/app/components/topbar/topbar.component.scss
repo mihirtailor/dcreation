@@ -5,7 +5,7 @@ $blur-value: 8px;
   background-color: $background-transparency;
   backdrop-filter: blur($blur-value);
   padding: 4px 0;
-  color: white;
+  color: #ffe4e4;
   position: fixed;
   width: 100%;
   top: 0;
@@ -24,7 +24,32 @@ $blur-value: 8px;
   }
 
   &.scrolled {
-    background-color: #388e3c;
+    background-color: #fdd3d3;
+
+    .contact-link {
+      color: #800020;
+      &:hover {
+        color: black; // You can change this to any color you prefer
+      }
+    }
+
+    .info-item i {
+      color: #800020;
+    }
+
+    .social-icons a {
+      color: #800020;
+    }
+  }
+}
+
+.contact-link {
+  color: inherit;
+  transition: color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: #800020; // You can change this to any color you prefer
   }
 }
 
@@ -36,7 +61,7 @@ $blur-value: 8px;
 
   i {
     margin-right: 5px;
-    color: var(--main-green);
+    color: #ffe4e4;
   }
 
   &:last-child {
@@ -49,13 +74,13 @@ $blur-value: 8px;
   align-items: center;
 
   a {
-    color: white;
+    color: #ffe4e4;
     margin-left: 15px;
     font-size: 16px;
     transition: all 0.3s ease;
 
     &:hover {
-      color: var(--main-green);
+      color: #800020;
     }
 
     &:first-child {

@@ -71,7 +71,7 @@
   font-family: "Playfair Display", serif;
   margin-bottom: 1rem;
   letter-spacing: 1px;
-  color: var(--secondary-red);
+  color: #ffe4e4;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transform: translateY(30px);
   opacity: 0;
@@ -85,7 +85,7 @@
   font-family: "Poppins", sans-serif;
   margin-bottom: 2rem;
   letter-spacing: 0.5px;
-  color: #ffb3b3;
+  color: #ffe4e4;
   transform: translateY(30px);
   opacity: 0;
   animation: slideUpFade 0.8s forwards 0.3s;
@@ -124,8 +124,8 @@
   color: white;
 
   &:hover {
-    background-color: var(--secondary-green);
-    color: black;
+    background-color: #800020;
+    color: #ffe4e4;
   }
 }
 
@@ -184,7 +184,7 @@
 /* About Preview Section */
 .about-preview {
   padding: 100px 0;
-  background-color: var(--accent-green);
+  background-color: #ffe4e4;
 
   .container {
     max-width: 1200px;
@@ -197,7 +197,7 @@
     font-weight: 700;
     font-family: "Playfair Display", serif;
     text-align: center;
-    color: var(--text-dark);
+    color: #800020;
     margin-bottom: 60px;
     position: relative;
 
@@ -209,7 +209,6 @@
       transform: translateX(-50%);
       width: 60px;
       height: 3px;
-      background: var(--secondary-green);
     }
   }
 
@@ -224,14 +223,14 @@
     h3 {
       font-size: var(--heading-3);
       font-weight: 600;
-      color: var(--text-dark);
+      color: #800020;
       margin-bottom: 20px;
     }
 
     p {
       font-size: var(--body-text);
       line-height: 1.6;
-      color: var(--text-dark);
+      color: #800020;
       margin-bottom: 30px;
     }
   }
@@ -249,13 +248,13 @@
         font-size: var(--heading-4);
         font-weight: 600;
         display: block;
-        color: var(--secondary-green);
+        color: #800020;
       }
 
       .label {
         font-size: var(--body-text-small);
         line-height: 1.5;
-        color: var(--text-dark);
+        color: #800020;
       }
     }
   }
@@ -263,14 +262,14 @@
   .learn-more {
     padding: 12px 30px;
     background: transparent;
-    border: 2px solid var(--secondary-green);
-    color: var(--secondary-green);
+    border: 2px solid #800020;
+    color: #800020;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-      background: var(--secondary-green);
+      color: #800020;
       color: white;
     }
   }
