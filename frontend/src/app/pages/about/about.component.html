@@ -1,1 +1,110 @@
-<p>about works!</p>
+<div class="about-container" [@fadeIn]>
+  <!-- Hero Section -->
+  <section class="hero-section mat-elevation-z3">
+    <div class="container">
+      <h1 class="display-3 text-center">Creative Design & Print Solutions</h1>
+      <h2 class="text-center">Transforming Ideas into Visual Excellence</h2>
+    </div>
+  </section>
+
+  <!-- Personal Intro -->
+  <section class="intro-section">
+    <mat-card>
+      <mat-card-content>
+        <div class="row align-items-center">
+          <div class="col-md-5">
+            <img
+              src="assets/images/hero/slide1.jpg"
+              alt="Studio Owner"
+              class="img-fluid rounded owner-image"
+            />
+          </div>
+          <div class="col-md-7">
+            <h2>Hi, I'm [Owner Name]</h2>
+            <p class="lead">
+              With over [X] years of experience in graphic design and print
+              services, I'm passionate about creating impactful visual solutions
+              that help businesses thrive.
+            </p>
+            <div class="expertise-chips">
+              <mat-chip-listbox>
+                <mat-chip>Brand Design</mat-chip>
+                <mat-chip>Print Expert</mat-chip>
+                <mat-chip>Digital Design</mat-chip>
+                <mat-chip>Marketing Collateral</mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Services & Expertise -->
+  <section class="services-section">
+    <div class="container">
+      <h2 class="text-center mb-5">Services & Expertise</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let service of services">
+          <mat-card class="service-card" [@cardHover]>
+            <mat-card-header>
+              <mat-icon>{{ service.icon }}</mat-icon>
+              <mat-card-title>{{ service.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ service.description }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Process -->
+  <section class="process-section">
+    <div class="container">
+      <h2 class="text-center mb-5">My Design Process</h2>
+      <mat-stepper>
+        <mat-step *ngFor="let step of designProcess">
+          <ng-template matStepLabel>{{ step.title }}</ng-template>
+          <div class="step-content">
+            <mat-icon>{{ step.icon }}</mat-icon>
+            <p>{{ step.description }}</p>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </section>
+
+  <!-- Client Testimonials -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h2 class="text-center mb-5">What Clients Say</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let testimonial of testimonials">
+          <mat-card class="testimonial-card">
+            <mat-card-content>
+              <mat-icon class="quote-icon">format_quote</mat-icon>
+              <p class="testimonial-text">{{ testimonial.quote }}</p>
+              <div class="client-info">
+                <h4>{{ testimonial.name }}</h4>
+                <p>{{ testimonial.company }}</p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section mat-elevation-z3">
+    <div class="container text-center">
+      <h2>Ready to Start Your Project?</h2>
+      <p class="lead">Let's create something amazing together</p>
+      <button mat-raised-button color="primary" routerLink="/contact">
+        Get in Touch
+      </button>
+    </div>
+  </section>
+</div>
