@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import {
   FormBuilder,
@@ -8,6 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { OfficeLocationComponent } from '../../components/office-location/office-location.component';
+import { ContactService } from '../../services/contact.service';
 
 interface ContactForm {
   name: string;
@@ -20,12 +22,19 @@ interface ContactForm {
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    OfficeLocationComponent,
+  ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
 })
 export class ContactComponent implements OnInit {
+  showForm = true;
   contactForm!: FormGroup;
+  contactService: ContactService = inject(ContactService);
 
   constructor(private fb: FormBuilder) {}
 
@@ -79,14 +88,14 @@ export class ContactComponent implements OnInit {
 
   onSubmit(): void {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
-      // API call will go here
-    } else {
-      Object.keys(this.contactForm.controls).forEach((key) => {
-        const control = this.contactForm.get(key);
-        if (control?.invalid) {
-          control.markAsTouched();
-        }
+      this.contactService.submitContactForm(this.contactForm.value).subscribe({
+        next: (response) => {
+          this.showForm = false;
+          this.contactForm.reset();
+        },
+        error: (error) => {
+          console.error('Error submitting form:', error);
+        },
       });
     }
   }

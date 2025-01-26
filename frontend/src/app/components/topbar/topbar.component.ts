@@ -1,21 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
 })
 export class TopbarComponent {
-  email: String = 'info@dcreation.com';
-  @HostListener('window:scroll', ['$event'])
+  isScrolled = false;
+  email = 'info@yourcompany.com';
+
+  @HostListener('window:scroll')
   onWindowScroll() {
-    const topbar = document.querySelector('.top-bar');
-    if (window.scrollY > 50) {
-      topbar?.classList.add('scrolled');
-    } else {
-      topbar?.classList.remove('scrolled');
-    }
+    this.isScrolled = window.scrollY > 0;
   }
 }

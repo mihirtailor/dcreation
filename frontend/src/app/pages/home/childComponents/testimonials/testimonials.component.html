@@ -1,0 +1,39 @@
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our Clients Say</h2>
+      <p>Trusted by businesses worldwide</p>
+    </div>
+
+    <div class="testimonials-container">
+      <div class="testimonials-wrapper">
+        <div
+          class="testimonial"
+          *ngFor="let testimonial of visibleTestimonials"
+        >
+          <div class="testimonial-inner">
+            <div class="client-image">
+              <img [src]="testimonial.image" [alt]="testimonial.name" />
+            </div>
+            <div class="testimonial-content">
+              <div class="quote">"{{ testimonial.quote }}"</div>
+              <div class="client-info">
+                <h4>{{ testimonial.name }}</h4>
+                <p>{{ testimonial.role }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="nav-btn prev" (click)="previousSlide()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-btn next" (click)="nextSlide()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

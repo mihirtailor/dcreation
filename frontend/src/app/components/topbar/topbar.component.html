@@ -1,20 +1,26 @@
-<div class="top-bar">
+<div class="top-bar" [ngClass]="{ scrolled: isScrolled }">
   <div class="container">
     <div class="contact-info">
-      <span class="info-item">
-        <a href="tel:+12345678900" class="contact-link">
-          <i class="fas fa-phone"></i> +1 234 567 8900
-        </a>
-      </span>
-      <span class="info-item">
-        <a href="mailto:{{ email }}" class="contact-link">
-          <i class="fas fa-envelope"></i> {{ email }}
-        </a>
-      </span>
+      <a href="tel:+12345678900" class="info-item">
+        <i class="fas fa-phone-alt"></i>
+        <span class="info-text">+1 234 567 8900</span>
+      </a>
+      <a href="mailto:{{ email }}" class="info-item">
+        <i class="fas fa-envelope"></i>
+        <span class="info-text">{{ email }}</span>
+      </a>
     </div>
+
     <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-icon" title="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" class="social-icon" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" class="social-icon" title="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
     </div>
   </div>
 </div>

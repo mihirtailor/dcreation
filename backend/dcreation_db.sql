@@ -14,3 +14,5 @@ CREATE TABLE sliders (
 );
 
 SELECT * FROM sliders;
+SELECT * FROM Contacts;
+DROP TABLE Contacts;

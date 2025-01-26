@@ -1,0 +1,53 @@
+<section class="about-preview" #animatedSection>
+  <div class="container" *ngIf="isVisible">
+    <div class="heading-section">
+      <h1 class="overline animate-item">About Us</h1>
+    </div>
+    <div class="about-grid">
+      <div class="image-column" [@imageStack]>
+        <div class="image-stack">
+          <img
+            src="assets/images/hero/slide1.jpg"
+            alt="DCreation Workshop"
+            class="main-image"
+          />
+          <img
+            src="assets/images/hero/slide2.jpg"
+            alt="Design Detail"
+            class="accent-image"
+          />
+          <div class="experience-badge" [@badge]>
+            <span>30+</span>
+            <p>Years of Excellence</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-column" [@content]>
+        <h2 class="animate-item">Transforming Spaces Into Experiences</h2>
+        <p class="lead-text animate-item">
+          Crafting excellence since 2020, we bring innovation and precision to
+          every project.
+        </p>
+
+        <div class="achievement-cards" [@cards]>
+          <div class="card">
+            <i class="fas fa-project-diagram"></i>
+            <h3>150+</h3>
+            <p>Completed Projects</p>
+          </div>
+          <div class="card">
+            <i class="fas fa-users"></i>
+            <h3>80+</h3>
+            <p>Happy Clients</p>
+          </div>
+        </div>
+
+        <button class="cta-button" [routerLink]="['/about']">
+          Discover Our Story
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

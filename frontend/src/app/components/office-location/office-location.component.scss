@@ -1,0 +1,104 @@
+@import "leaflet/dist/leaflet.css";
+
+.office-location {
+  padding: 60px 0;
+  background-color: #f8f9fa;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    &:first-child {
+      grid-column: 1 / -1;
+      height: 300px;
+    }
+  }
+}
+
+.map-container {
+  width: 100%;
+  height: 300px; // Increased height for better visibility
+  position: relative;
+  overflow: hidden;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.directions-info {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  h4 {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+}
+
+.direction-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  i {
+    color: #4a90e2;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    min-width: 24px;
+  }
+
+  span {
+    color: #495057;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+
+    img {
+      height: 200px;
+
+      &:first-child {
+        height: 200px;
+      }
+    }
+  }
+
+  .map-container {
+    margin-top: 1.5rem;
+  }
+}

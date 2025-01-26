@@ -1,0 +1,76 @@
+<div class="admin-container">
+  <section class="upload-section">
+    <h2>Add New Slide</h2>
+    <form (ngSubmit)="uploadSlide()" class="upload-form">
+      <div class="form-group">
+        <label>Image:</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" [(ngModel)]="newSlide.title" name="title" required />
+      </div>
+      <div class="form-group">
+        <label>Description:</label>
+        <textarea
+          [(ngModel)]="newSlide.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" [disabled]="!selectedFile">Upload Slide</button>
+    </form>
+  </section>
+
+  <section class="slides-section">
+    <h2>Current Slides</h2>
+    <div class="slides-grid">
+      <div class="slide-card" *ngFor="let slide of slides">
+        <img [src]="slide.image_url" [alt]="slide.title" />
+        <div class="slide-info">
+          <!-- View Mode -->
+          <div *ngIf="!slide.isEditing">
+            <h3>{{ slide.title }}</h3>
+            <p>{{ slide.description }}</p>
+            <div class="button-group">
+              <button (click)="slide.isEditing = true" class="edit-btn">
+                Edit
+              </button>
+              <button (click)="deleteSlide(slide.id)" class="delete-btn">
+                Delete
+              </button>
+            </div>
+          </div>
+
+          <!-- Edit Mode -->
+          <div *ngIf="slide.isEditing" class="edit-mode">
+            <input
+              type="text"
+              [(ngModel)]="slide.title"
+              name="title"
+              class="edit-input"
+            />
+            <textarea
+              [(ngModel)]="slide.description"
+              name="description"
+              class="edit-textarea"
+            ></textarea>
+            <div class="button-group">
+              <button (click)="updateSlide(slide)" class="save-btn">
+                Save
+              </button>
+              <button (click)="slide.isEditing = false" class="cancel-btn">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

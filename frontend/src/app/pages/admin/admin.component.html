@@ -1,46 +1,18 @@
 <div class="admin-container">
   <header>
     <h1>Admin Dashboard</h1>
-    <button (click)="logout()">Logout</button>
+    <button (click)="logout()" class="logout-btn">Logout</button>
   </header>
 
-  <section class="slider-management">
-    <h2>Manage Slider Images</h2>
+  <nav class="admin-nav">
+    <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="slider" routerLinkActive="active">Slider</a>
+    <a routerLink="portfolio" routerLinkActive="active">Portfolio</a>
+    <a routerLink="requests" routerLinkActive="active">Requests</a>
+    <a routerLink="services" routerLinkActive="active">Services</a>
+  </nav>
 
-    <div class="upload-section">
-      <form (ngSubmit)="uploadSlide()">
-        <input
-          type="file"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-          required
-        />
-        <input
-          type="text"
-          [(ngModel)]="newSlide.title"
-          name="title"
-          placeholder="Slide Title"
-          required
-        />
-        <textarea
-          [(ngModel)]="newSlide.description"
-          name="description"
-          placeholder="Slide Description"
-          required
-        ></textarea>
-        <button type="submit">Upload New Slide</button>
-      </form>
-    </div>
-
-    <div class="slides-grid">
-      <div *ngFor="let slide of slides" class="slide-card">
-        <img [src]="slide.image_url" [alt]="slide.title" />
-        <div class="slide-info">
-          <h3>{{ slide.title }}</h3>
-          <p>{{ slide.description }}</p>
-          <button (click)="deleteSlide(slide.id)">Delete</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main class="admin-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>

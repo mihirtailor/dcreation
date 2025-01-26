@@ -1,0 +1,41 @@
+<section class="services-preview py-5" #animatedSection>
+  <div class="container" [@fadeIn]="isVisible">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8">
+        <span
+          class="text-primary text-uppercase fw-bold letter-spacing-lg mb-3 d-block"
+        >
+          What We Offer
+        </span>
+        <h2 class="display-4 fw-bold mb-4">Our Creative Services</h2>
+        <p class="lead text-muted">
+          Transform your brand with our comprehensive design solutions
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div
+        class="col-md-6 col-lg-4"
+        *ngFor="let card of serviceCards; let i = index"
+        [@slideIn]="isVisible"
+      >
+        <div class="service-card h-100">
+          <div class="card-image">
+            <img [src]="card.image" [alt]="card.title" />
+          </div>
+          <div class="card-content">
+            <div class="icon-wrapper mb-4">
+              <i [class]="card.icon"></i>
+            </div>
+            <h3 class="h4 mb-3">{{ card.title }}</h3>
+            <p class="mb-4">{{ card.description }}</p>
+            <a class="learn-more text-decoration-none">
+              Learn More <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

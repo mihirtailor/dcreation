@@ -1,1 +1,41 @@
-<p>office-location works!</p>
+<section class="office-location">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-4">
+        <h2 class="section-title">Visit Our Office</h2>
+        <p class="section-subtitle">Experience our workspace in person</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Office Images -->
+      <div class="col-md-6">
+        <div class="office-images">
+          <div class="image-grid">
+            <img
+              *ngFor="let image of officeImages"
+              [src]="image.src"
+              [alt]="image.alt"
+              class="img-fluid rounded shadow-sm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Map and Directions -->
+      <div class="col-md-6">
+        <div class="map-container rounded shadow-sm">
+          <div id="map"></div>
+        </div>
+
+        <div class="directions-info mt-4">
+          <h4 class="mb-3">How to Reach Us</h4>
+          <div class="direction-item" *ngFor="let direction of directions">
+            <i [class]="'bi ' + direction.icon"></i>
+            <span>{{ direction.text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

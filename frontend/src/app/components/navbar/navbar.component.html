@@ -1,36 +1,36 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg" [ngClass]="{ scrolled: isScrolled }">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="#"> <span>Your</span>Brand </a>
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">
+      <span class="brand-highlight">Next</span>Gen
+    </a>
 
+    <!-- Mobile Toggle -->
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+      (click)="toggleNavbar()"
+      [attr.aria-expanded]="!isCollapsed"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <!-- Navigation Items -->
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ show: !isCollapsed }"
+      id="navbarNav"
+    >
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#home">HOME</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#about">ABOUT</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#services">SERVICES</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#portfolio">PORTFOLIO</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">CONTACT</a>
+        <li class="nav-item" *ngFor="let item of navItems">
+          <a
+            class="nav-link"
+            [href]="item.link"
+            [ngClass]="{ active: activeLink === item.link }"
+          >
+            {{ item.name }}
+            <div class="nav-indicator"></div>
+          </a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,92 @@
+<div class="requests-container">
+  <h2>
+    Contact Requests
+    <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }} new</span>
+  </h2>
+  <div class="requests-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Company</th>
+          <th>Service</th>
+          <th>Message</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let contact of (contacts$ | async)?.data"
+          [class.unread]="!contact.isRead"
+          (click)="viewDetails(contact)"
+          class="cursor-pointer"
+        >
+          <td>
+            <span class="status-dot" [class.unread]="!contact.isRead"></span>
+          </td>
+          <td>{{ contact.createdAt | date : "short" }}</td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.phone }}</td>
+          <td>{{ contact.company }}</td>
+          <td>{{ contact.service }}</td>
+          <td class="message-cell">
+            {{ contact.message | slice : 0 : 50 }}...
+          </td>
+          <td>
+            <button
+              *ngIf="!contact.isRead"
+              (click)="markAsRead(contact.id); $event.stopPropagation()"
+            >
+              Mark as Read
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal" *ngIf="selectedContact" (click)="closeDetails()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Contact Request Details</h3>
+      <button class="close-btn" (click)="closeDetails()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-row">
+        <span class="label">Date:</span>
+        <span>{{ selectedContact.createdAt | date : "medium" }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Name:</span>
+        <span>{{ selectedContact.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Email:</span>
+        <span>{{ selectedContact.email }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Phone:</span>
+        <span>{{ selectedContact.phone }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Company:</span>
+        <span>{{ selectedContact.company }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Service:</span>
+        <span>{{ selectedContact.service }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Message:</span>
+        <div class="message-box">{{ selectedContact.message }}</div>
+      </div>
+    </div>
+  </div>
+</div>

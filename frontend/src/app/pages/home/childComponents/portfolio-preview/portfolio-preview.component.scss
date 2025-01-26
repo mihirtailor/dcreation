@@ -1,0 +1,129 @@
+.portfolio-preview {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+}
+
+.portfolio-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+    .card-img-overlay {
+      opacity: 1;
+    }
+
+    img {
+      transform: scale(1.1);
+    }
+  }
+
+  .card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      height: 350px;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+  }
+
+  .card-img-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+    opacity: 0;
+    transition: all 0.4s ease;
+
+    .overlay-content {
+      transform: translateY(20px);
+      transition: transform 0.4s ease;
+      color: white;
+
+      .card-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-text {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .btn-group {
+        .btn {
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+
+  &:hover .overlay-content {
+    transform: translateY(0);
+  }
+}
+
+.pulse-button {
+  position: relative;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-card {
+    .card-img-wrapper img {
+      height: 250px;
+    }
+
+    .card-img-overlay {
+      .overlay-content {
+        .card-title {
+          font-size: 1.5rem;
+        }
+        .card-text {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

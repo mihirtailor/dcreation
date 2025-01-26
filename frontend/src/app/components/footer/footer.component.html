@@ -1,1 +1,75 @@
-<p>footer works!</p>
+<footer class="footer-light">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Logo & Company Info -->
+      <div class="col-lg-4" [@fadeIn]>
+        <div class="footer-brand">
+          <img
+            src="assets/images/hero/slide1.jpg"
+            alt="DCreation Logo"
+            class="footer-logo"
+          />
+          <p class="mt-3">
+            DCreation is a premier digital agency specializing in innovative
+            design solutions. We transform ideas into compelling digital
+            experiences that drive results and create lasting impressions.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-4" [@fadeIn]>
+        <div class="quick-links-container">
+          <h4>Quick Links</h4>
+          <ul class="footer-list">
+            <li><a routerLink="/about">About Us</a></li>
+            <li><a routerLink="/services">Services</a></li>
+            <li><a routerLink="/portfolio">Portfolio</a></li>
+            <li><a routerLink="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-lg-4" [@fadeIn]>
+        <h4>Contact Us</h4>
+        <ul class="contact-info">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{ contactInfo.address }}</span>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <span>{{ contactInfo.phone }}</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span>{{ contactInfo.email }}</span>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            <span>{{ contactInfo.hours }}</span>
+          </li>
+        </ul>
+        <div class="social-links mt-4">
+          <a
+            *ngFor="let social of socialLinks"
+            [href]="social.url"
+            [attr.aria-label]="social.label"
+          >
+            <i [class]="social.icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom text-center">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-6 text-center">
+          <p>&copy; {{ currentYear }} DCreation. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
