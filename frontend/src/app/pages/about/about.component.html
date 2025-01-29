@@ -1,109 +1,113 @@
 <div class="about-container" [@fadeIn]>
   <!-- Hero Section -->
-  <section class="hero-section mat-elevation-z3">
-    <div class="container">
-      <h1 class="display-3 text-center">Creative Design & Print Solutions</h1>
-      <h2 class="text-center">Transforming Ideas into Visual Excellence</h2>
+  <section class="hero-section">
+    <div class="hero-image">
+      <img src="assets/images/hero/slide1.jpg" alt="Design Studio" />
+      <div class="hero-overlay">
+        <div class="container">
+          <div class="hero-content" [@fadeInUp]>
+            <h1 class="heading-1">Crafting Visual Excellence</h1>
+            <p class="lead">
+              Where Creative Design Meets Professional Print Solutions
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Personal Intro -->
-  <section class="intro-section">
-    <mat-card>
-      <mat-card-content>
-        <div class="row align-items-center">
-          <div class="col-md-5">
+  <!-- Owner Introduction -->
+  <section class="owner-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5" [@slideInLeft]>
+          <div class="owner-image">
             <img
-              src="assets/images/hero/slide1.jpg"
-              alt="Studio Owner"
-              class="img-fluid rounded owner-image"
+              src="assets/images/hero/slide2.jpg"
+              alt="Owner Name"
+              class="rounded shadow"
             />
           </div>
-          <div class="col-md-7">
-            <h2>Hi, I'm [Owner Name]</h2>
-            <p class="lead">
-              With over [X] years of experience in graphic design and print
-              services, I'm passionate about creating impactful visual solutions
-              that help businesses thrive.
-            </p>
-            <div class="expertise-chips">
-              <mat-chip-listbox>
-                <mat-chip>Brand Design</mat-chip>
-                <mat-chip>Print Expert</mat-chip>
-                <mat-chip>Digital Design</mat-chip>
-                <mat-chip>Marketing Collateral</mat-chip>
-              </mat-chip-listbox>
+        </div>
+        <div class="col-lg-7" [@slideInRight]>
+          <div class="owner-content">
+            <h2 class="heading-2">{{ ownerName }}</h2>
+            <p class="subtitle">Founder & Creative Director</p>
+            <p class="owner-bio">{{ ownerBio }}</p>
+            <div class="owner-expertise">
+              <span class="expertise-tag">Graphic Design</span>
+              <span class="expertise-tag">Print Solutions</span>
+              <span class="expertise-tag">Brand Strategy</span>
             </div>
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </section>
-
-  <!-- Services & Expertise -->
-  <section class="services-section">
-    <div class="container">
-      <h2 class="text-center mb-5">Services & Expertise</h2>
-      <div class="row">
-        <div class="col-md-4" *ngFor="let service of services">
-          <mat-card class="service-card" [@cardHover]>
-            <mat-card-header>
-              <mat-icon>{{ service.icon }}</mat-icon>
-              <mat-card-title>{{ service.title }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>{{ service.description }}</p>
-            </mat-card-content>
-          </mat-card>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- Work Process -->
-  <section class="process-section">
+  <!-- Services Overview -->
+  <section class="services-overview">
     <div class="container">
-      <h2 class="text-center mb-5">My Design Process</h2>
-      <mat-stepper>
-        <mat-step *ngFor="let step of designProcess">
-          <ng-template matStepLabel>{{ step.title }}</ng-template>
-          <div class="step-content">
-            <mat-icon>{{ step.icon }}</mat-icon>
-            <p>{{ step.description }}</p>
+      <h2 class="text-center mb-5" [@fadeInUp]>What We Offer</h2>
+      <div class="row g-4">
+        <div class="col-md-4" *ngFor="let service of services" [@fadeInUp]>
+          <div class="service-card">
+            <div class="icon-wrapper">
+              <i [class]="service.icon"></i>
+            </div>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
           </div>
-        </mat-step>
-      </mat-stepper>
-    </div>
-  </section>
-
-  <!-- Client Testimonials -->
-  <section class="testimonials-section">
-    <div class="container">
-      <h2 class="text-center mb-5">What Clients Say</h2>
-      <div class="row">
-        <div class="col-md-4" *ngFor="let testimonial of testimonials">
-          <mat-card class="testimonial-card">
-            <mat-card-content>
-              <mat-icon class="quote-icon">format_quote</mat-icon>
-              <p class="testimonial-text">{{ testimonial.quote }}</p>
-              <div class="client-info">
-                <h4>{{ testimonial.name }}</h4>
-                <p>{{ testimonial.company }}</p>
-              </div>
-            </mat-card-content>
-          </mat-card>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section class="cta-section mat-elevation-z3">
+  <!-- Experience Section -->
+  <section class="experience-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" [@slideInLeft]>
+          <div class="experience-content">
+            <h2>Years of Excellence</h2>
+            <div class="stats-container">
+              <div class="stat-item">
+                <h3>{{ yearsInBusiness }}+</h3>
+                <p>Years in Business</p>
+              </div>
+              <div class="stat-item">
+                <h3>{{ completedProjects }}+</h3>
+                <p>Projects Completed</p>
+              </div>
+              <div class="stat-item">
+                <h3>{{ satisfiedClients }}+</h3>
+                <p>Happy Clients</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" [@slideInRight]>
+          <img
+            src="assets/images/hero/slide1.jpg"
+            alt="Our Workspace"
+            class="img-fluid rounded shadow-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="contact-cta">
     <div class="container text-center">
-      <h2>Ready to Start Your Project?</h2>
-      <p class="lead">Let's create something amazing together</p>
-      <button mat-raised-button color="primary" routerLink="/contact">
-        Get in Touch
+      <h2 [@fadeInUp]>Ready to Start Your Project?</h2>
+      <p class="lead" [@fadeInUp]>Let's create something amazing together</p>
+      <button
+        class="btn btn-primary btn-lg"
+        (click)="navigateToContact()"
+        [@bounce]
+      >
+        Get in Touch <i class="fas fa-arrow-right ms-2"></i>
       </button>
     </div>
   </section>

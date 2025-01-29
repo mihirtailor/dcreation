@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   trigger,
   transition,
@@ -6,46 +7,14 @@ import {
   animate,
   state,
 } from '@angular/animations';
-import { NgFor } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatStepperModule } from '@angular/material/stepper';
-
-interface Service {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-interface ProcessStep {
-  title: string;
-  icon: string;
-  description: string;
-}
-
-interface Testimonial {
-  quote: string;
-  name: string;
-  company: string;
-}
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [
-    NgFor,
-    RouterLink,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatStepperModule,
-  ],
+  imports: [CommonModule],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.scss',
+  styleUrls: ['./about.component.scss'],
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
@@ -53,84 +22,77 @@ interface Testimonial {
         animate('600ms', style({ opacity: 1 })),
       ]),
     ]),
-    trigger('cardHover', [
-      state(
-        'normal',
-        style({
-          transform: 'scale(1)',
-          boxShadow: 'none',
-        })
-      ),
-      state(
-        'hovered',
-        style({
-          transform: 'scale(1.05)',
-          boxShadow: '0 8px 16px rgba(0,0,0,.2)',
-        })
-      ),
-      transition('normal <=> hovered', animate('200ms ease-in')),
+    trigger('slideInLeft', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate(
+          '600ms ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
+      ]),
+    ]),
+    trigger('slideInRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate(
+          '600ms ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
+      ]),
+    ]),
+    trigger('fadeInUp', [
+      transition(':enter', [
+        style({ transform: 'translateY(40px)', opacity: 0 }),
+        animate(
+          '600ms ease-out',
+          style({ transform: 'translateY(0)', opacity: 1 })
+        ),
+      ]),
+    ]),
+    trigger('bounce', [
+      state('*', style({ transform: 'translateY(0)' })),
+      transition('* => *', [
+        animate('300ms ease-in', style({ transform: 'translateY(-10px)' })),
+        animate('300ms ease-out', style({ transform: 'translateY(0)' })),
+      ]),
     ]),
   ],
 })
-export class AboutComponent {
-  services: Service[] = [
+export class AboutComponent implements OnInit {
+  ownerName: string = 'John Doe';
+  ownerBio: string =
+    "With over 15 years of experience in graphic design and printing, I've helped countless businesses bring their creative visions to life. My passion for design and commitment to quality drives every project we undertake.";
+
+  yearsInBusiness: number = 15;
+  completedProjects: number = 1000;
+  satisfiedClients: number = 500;
+
+  services = [
     {
-      icon: 'palette',
+      icon: 'fas fa-pencil-ruler',
       title: 'Graphic Design',
       description:
-        'Custom designs that capture your brand essence and message.',
+        'Custom designs tailored to your brand identity and business needs.',
     },
     {
-      icon: 'print',
-      title: 'Print Services',
+      icon: 'fas fa-print',
+      title: 'Professional Printing',
       description:
-        'Professional printing for business cards, brochures, banners, and more.',
+        'High-quality printing services for all your marketing materials.',
     },
     {
-      icon: 'brush',
+      icon: 'fas fa-palette',
       title: 'Brand Identity',
-      description: 'Complete branding solutions from logos to style guides.',
+      description:
+        'Comprehensive branding solutions to make your business stand out.',
     },
   ];
 
-  designProcess: ProcessStep[] = [
-    {
-      title: 'Discovery',
-      icon: 'search',
-      description: 'Understanding your needs, goals, and vision',
-    },
-    {
-      title: 'Concept',
-      icon: 'lightbulb',
-      description: 'Creating initial designs and concepts',
-    },
-    {
-      title: 'Refine',
-      icon: 'edit',
-      description: 'Perfecting the design through feedback and revision',
-    },
-    {
-      title: 'Deliver',
-      icon: 'done_all',
-      description: 'Final production and quality assurance',
-    },
-  ];
+  constructor(private router: Router) {}
 
-  testimonials: Testimonial[] = [
-    {
-      quote: 'The attention to detail and creativity exceeded my expectations!',
-      name: 'Sarah Johnson',
-      company: 'Local Cafe Owner',
-    },
-    {
-      quote: 'Professional, timely, and excellent communication throughout.',
-      name: 'Mike Williams',
-      company: 'Real Estate Agency',
-    },
-    {
-      quote: 'Transformed our brand identity completely. Highly recommended!',
-      name: 'Lisa Chen',
-      company: 'Tech Startup',
-    },
-  ];
+  ngOnInit(): void {}
+
+  navigateToContact(): void {
+    this.router.navigate(['/contact']);
+  }
 }
