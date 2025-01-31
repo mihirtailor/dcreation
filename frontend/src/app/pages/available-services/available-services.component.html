@@ -13,6 +13,7 @@
       </div>
     </div>
   </section>
+
   <!-- Quick Navigation -->
   <section class="services-navigation">
     <div class="container">
@@ -22,7 +23,7 @@
           *ngFor="let category of serviceCategories"
           (click)="scrollToCategory(category.id)"
         >
-          <i [class]="category.icon"></i>
+          <i class="fas {{ category.icon }}"></i>
           {{ category.name }}
         </button>
       </div>
@@ -46,7 +47,7 @@
           >
             <div class="service-card">
               <div class="service-image">
-                <img [src]="service.imageUrl" [alt]="service.name" />
+                <img [src]="service.image_url" [alt]="service.name" />
               </div>
               <div class="service-content">
                 <h3>{{ service.name }}</h3>

@@ -3,6 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const { verifyUser, authRoutes } = require("./middleware/auth");
 const contactRoutes = require("./routes/contact");
+const uploadRoutes = require("./routes/upload");
+const servicesRoutes = require("./routes/services"); // Add this line
 const { sequelize } = require("./connection");
 
 dotenv.config();
@@ -24,11 +26,9 @@ app.get("/admin", verifyUser, (req, res) => {
 
 // Use the authentication routes
 app.use("/api", authRoutes);
-
-const uploadRoutes = require("./routes/upload");
 app.use("/api", uploadRoutes);
-
 app.use("/api", contactRoutes);
+app.use("/api", servicesRoutes); // Add this line
 
 const PORT = process.env.PORT || 5000;
 
@@ -40,6 +40,7 @@ sequelize
     .catch((err) => {
         console.log("Error:", err);
     });
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

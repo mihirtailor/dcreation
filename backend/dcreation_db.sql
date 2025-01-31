@@ -16,3 +16,24 @@ CREATE TABLE sliders (
 SELECT * FROM sliders;
 SELECT * FROM Contacts;
 DROP TABLE Contacts;
+
+CREATE TABLE services (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT,
+    name VARCHAR(255),
+    description TEXT,
+    image_url VARCHAR(255),
+    public_id VARCHAR(255),
+    price VARCHAR(100),
+    features JSON,
+    order_number INT DEFAULT 0
+);
+
+CREATE TABLE service_categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    icon VARCHAR(100),
+    description TEXT,
+    order_number INT DEFAULT 0
+);
+

@@ -1,1 +1,200 @@
-<p>services works!</p>
+<div class="admin-container">
+  <!-- Category Management Section -->
+  <section class="category-section">
+    <h2>Categories Management</h2>
+
+    <!-- Add Category Form -->
+    <form
+      [formGroup]="categoryForm"
+      (ngSubmit)="createCategory()"
+      class="category-form"
+    >
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" formControlName="name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Icon:</label>
+        <div class="icon-selector">
+          <select formControlName="icon" required>
+            <option value="">Select an icon</option>
+            <option value="fa-print">🖨️ Print</option>
+            <option value="fa-pen">✏️ Pen</option>
+            <option value="fa-sign">🪧 Sign</option>
+            <option value="fa-palette">🎨 Design</option>
+            <option value="fa-images">🖼️ Images</option>
+            <option value="fa-book">📚 Book</option>
+            <option value="fa-credit-card">💳 Card</option>
+            <option value="fa-flag">🏷️ Banner</option>
+          </select>
+          <div class="icon-preview" *ngIf="categoryForm.get('icon')?.value">
+            <i class="fas {{ categoryForm.get('icon')?.value }}"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description:</label>
+        <textarea formControlName="description" required></textarea>
+      </div>
+
+      <button type="submit" [disabled]="!categoryForm.valid">
+        Add Category
+      </button>
+    </form>
+
+    <!-- Categories List -->
+    <div class="categories-list">
+      <div class="category-card" *ngFor="let category of categories">
+        <!-- View Mode -->
+        <div *ngIf="!category.isEditing">
+          <h3>{{ category.name }}</h3>
+          <p><i class="fas {{ category.icon }}"></i></p>
+          <p>{{ category.description }}</p>
+          <div class="button-group">
+            <button (click)="category.isEditing = true">Edit</button>
+            <button (click)="deleteCategory(category.id)">Delete</button>
+          </div>
+        </div>
+
+        <!-- Edit Mode -->
+        <div *ngIf="category.isEditing" class="edit-mode">
+          <input type="text" [(ngModel)]="category.name" />
+          <div class="icon-selector">
+            <select [(ngModel)]="category.icon">
+              <option value="fa-print">🖨️ Print</option>
+              <option value="fa-pen">✏️ Pen</option>
+              <option value="fa-sign">🪧 Sign</option>
+              <option value="fa-palette">🎨 Design</option>
+              <option value="fa-images">🖼️ Images</option>
+              <option value="fa-book">📚 Book</option>
+              <option value="fa-credit-card">💳 Card</option>
+              <option value="fa-flag">🏷️ Banner</option>
+            </select>
+            <div class="icon-preview" *ngIf="category.icon">
+              <i class="fas {{ category.icon }}"></i>
+            </div>
+          </div>
+          <textarea [(ngModel)]="category.description"></textarea>
+          <div class="button-group">
+            <button (click)="updateCategory(category)">Save</button>
+            <button (click)="category.isEditing = false">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Management Section -->
+  <section class="service-section">
+    <h2>Services Management</h2>
+
+    <!-- Add Service Form -->
+    <form
+      [formGroup]="serviceForm"
+      (ngSubmit)="uploadService()"
+      class="service-form"
+    >
+      <div class="form-group">
+        <label>Category:</label>
+        <select formControlName="categoryId" required>
+          <option value="0">Select Category</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Image:</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" formControlName="name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Description:</label>
+        <textarea formControlName="description" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Price:</label>
+        <input type="text" formControlName="price" required />
+      </div>
+
+      <div class="features-section">
+        <label>Features:</label>
+        <div class="feature-inputs" formArrayName="features">
+          <div
+            *ngFor="let feature of features.controls; let i = index"
+            class="feature-input"
+          >
+            <input type="text" [formControlName]="i" required />
+            <button
+              type="button"
+              (click)="removeFeatureField(i)"
+              *ngIf="features.length > 1"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <button type="button" (click)="addFeatureField()">Add Feature</button>
+      </div>
+
+      <button type="submit">Upload Service</button>
+    </form>
+
+    <!-- Services List -->
+    <div class="services-grid">
+      <div class="service-card" *ngFor="let service of services">
+        <!-- View Mode -->
+        <div *ngIf="!service.isEditing">
+          <img [src]="service.image_url" [alt]="service.name" />
+          <div class="service-info">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            <p class="price">{{ service.price }}</p>
+            <ul class="features-list">
+              <li *ngFor="let feature of service.features">{{ feature }}</li>
+            </ul>
+            <div class="button-group">
+              <button (click)="service.isEditing = true">Edit</button>
+              <button (click)="deleteService(service.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit Mode -->
+        <div *ngIf="service.isEditing" class="edit-mode">
+          <select [(ngModel)]="service.categoryId">
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+          <input type="text" [(ngModel)]="service.name" />
+          <textarea [(ngModel)]="service.description"></textarea>
+          <input type="text" [(ngModel)]="service.price" />
+          <div class="edit-features">
+            <div *ngFor="let feature of service.features; let i = index">
+              <input type="text" [(ngModel)]="service.features[i]" />
+            </div>
+          </div>
+          <div class="button-group">
+            <button (click)="updateService(service)">Save</button>
+            <button (click)="service.isEditing = false">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

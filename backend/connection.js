@@ -26,8 +26,10 @@ connection.connect((error) => {
     else console.log("MySQL Connected!!!!");
 });
 
-// Initialize Contact model
+// Initialize models
 const Contact = require("./models/contact")(sequelize);
+const Service = require("./models/service")(sequelize);
+const Category = require("./models/category")(sequelize);
 
 // Test Sequelize connection
 sequelize
@@ -35,4 +37,4 @@ sequelize
     .then(() => console.log("Sequelize Connected!!!!"))
     .catch((error) => console.log(error));
 
-module.exports = { connection, sequelize, Contact };
+module.exports = { connection, sequelize, Contact, Service, Category };
