@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -17,7 +19,7 @@ import {
 @Component({
   selector: 'app-services-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatButtonModule],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
 })
@@ -28,6 +30,8 @@ export class ServicesComponent implements OnInit {
   isLoading = false;
   categoryForm!: FormGroup;
   serviceForm!: FormGroup;
+
+  private snackBar: MatSnackBar = inject(MatSnackBar);
 
   constructor(
     private availableServices: AvailableService,
@@ -112,6 +116,7 @@ export class ServicesComponent implements OnInit {
     if (this.selectedFile && this.serviceForm.valid) {
       this.isLoading = true;
       const formData = new FormData();
+
       formData.append('image', this.selectedFile);
       formData.append('name', this.serviceForm.get('name')?.value);
       formData.append(
@@ -124,11 +129,23 @@ export class ServicesComponent implements OnInit {
 
       this.availableServices.createService(formData).subscribe({
         next: () => {
+          this.snackBar.open('Service created successfully!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar'],
+          });
           this.loadServices();
           this.resetForms();
           this.isLoading = false;
         },
         error: (error) => {
+          this.snackBar.open('Error creating service', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar'],
+          });
           console.error('Error uploading service:', error);
           this.isLoading = false;
         },
@@ -198,9 +215,18 @@ export class ServicesComponent implements OnInit {
     });
   }
 
+  getCategoryName(categoryId: number): string {
+    const category = this.categories.find((cat) => cat.id === categoryId);
+    return category ? category.name : '';
+  }
+
   private isValidImageFile(file: File): boolean {
     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
     return allowedTypes.includes(file.type);
+  }
+
+  getServicesByCategory(categoryId: number): any[] {
+    return this.services.filter((service) => service.categoryId === categoryId);
   }
 
   private resetForms() {
