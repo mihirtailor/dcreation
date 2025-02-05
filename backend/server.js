@@ -4,7 +4,8 @@ const dotenv = require("dotenv");
 const { verifyUser, authRoutes } = require("./middleware/auth");
 const contactRoutes = require("./routes/contact");
 const uploadRoutes = require("./routes/upload");
-const servicesRoutes = require("./routes/services"); // Add this line
+const servicesRoutes = require("./routes/services");
+const portfolioRoutes = require("./routes/portfolio");
 const { sequelize } = require("./connection");
 
 dotenv.config();
@@ -28,8 +29,8 @@ app.get("/admin", verifyUser, (req, res) => {
 app.use("/api", authRoutes);
 app.use("/api", uploadRoutes);
 app.use("/api", contactRoutes);
-app.use("/api", servicesRoutes); // Add this line
-
+app.use("/api", servicesRoutes);
+app.use("/api", portfolioRoutes);
 const PORT = process.env.PORT || 5000;
 
 sequelize

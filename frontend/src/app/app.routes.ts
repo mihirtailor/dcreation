@@ -9,9 +9,10 @@ import { AvailableServicesComponent } from './pages/available-services/available
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DashboardComponent } from './pages/admin/childComponents/dashboard/dashboard.component';
 import { SliderComponent } from './pages/admin/childComponents/slider/slider.component';
-import { PortfolioComponent } from './pages/admin/childComponents/portfolio/portfolio.component';
 import { RequestsComponent } from './pages/admin/childComponents/requests/requests.component';
 import { ServicesComponent } from './pages/admin/childComponents/services/services.component';
+import { PortfolioAdminComponent } from './pages/admin/childComponents/portfolio/portfolio.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'services', component: AvailableServicesComponent },
+  { path: 'portfolio', component: PortfolioComponent },
   {
     path: 'admin',
     component: AdminLayoutComponent,
@@ -32,7 +34,7 @@ export const routes: Routes = [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: DashboardComponent },
           { path: 'slider', component: SliderComponent },
-          { path: 'portfolio', component: PortfolioComponent },
+          { path: 'portfolio', component: PortfolioAdminComponent },
           { path: 'requests', component: RequestsComponent },
           { path: 'services', component: ServicesComponent },
         ],

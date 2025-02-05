@@ -1,0 +1,283 @@
+// Hero Section
+.portfolio-hero {
+  .hero-parallax {
+    position: relative;
+    background-color: #000;
+
+    img {
+      opacity: 0.7;
+      transition: transform 0.5s ease;
+    }
+  }
+
+  .hero-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+// Filter Section
+.btn-filter {
+  background: transparent;
+  border: 2px solid #5e72e4;
+  color: #5e72e4;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &.active {
+    background: #5e72e4;
+    color: white;
+    transform: translateY(-2px);
+  }
+}
+
+// Masonry Grid
+.masonry-grid {
+  columns: 3;
+  column-gap: 2rem;
+
+  @media (max-width: 992px) {
+    columns: 2;
+  }
+
+  @media (max-width: 768px) {
+    columns: 1;
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+}
+
+// Portfolio Cards
+.portfolio-card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+
+    .hover-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-image {
+      transform: scale(1.1);
+    }
+  }
+
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(94, 114, 228, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    .content {
+      text-align: center;
+      color: white;
+      padding: 2rem;
+
+      .category-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+
+      .title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .view-project-btn {
+        background: white;
+        color: #5e72e4;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
+// Enhanced Modal Styling
+::ng-deep .modal-dialog {
+  max-width: 90vw;
+  margin: 1.75rem auto;
+}
+
+::ng-deep .portfolio-modal {
+  .modal-content {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .modal-header {
+    border: none;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+  }
+
+  .btn-close {
+    background-color: white;
+    padding: 1rem;
+    margin: 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    opacity: 1;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+
+  .project-showcase {
+    .carousel-image-container {
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
+      background-color: #000;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    // Add NgbCarousel custom styles
+    ::ng-deep {
+      .carousel {
+        position: relative;
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          width: 50px;
+          height: 50px;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 50%;
+          top: 50%;
+          transform: translateY(-50%);
+          margin: 0 20px;
+          opacity: 0.8;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          .carousel-control-prev-icon,
+          .carousel-control-next-icon {
+            filter: invert(1) grayscale(100);
+          }
+        }
+
+        .carousel-indicators {
+          bottom: 20px;
+          margin-bottom: 0;
+
+          button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin: 0 5px;
+            border: none;
+
+            &.active {
+              background-color: #fff;
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .project-details {
+    .category-tag {
+      color: #5e72e4;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-description {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .meta-item {
+      margin-bottom: 1.5rem;
+
+      h6 {
+        color: #8392ab;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .tag {
+        background: #f6f9fc;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        color: #5e72e4;
+      }
+    }
+  }
+}

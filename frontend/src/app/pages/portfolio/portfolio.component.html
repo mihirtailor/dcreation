@@ -1,1 +1,145 @@
-<p>portfolio works!</p>
+<div class="portfolio-container">
+  <!-- Dynamic Hero Section -->
+  <section class="portfolio-hero position-relative">
+    <div class="hero-parallax w-100" style="height: 600px">
+      <img
+        src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc"
+        alt="Portfolio Hero"
+        class="w-100 h-100 object-fit-cover"
+      />
+      <div class="hero-overlay d-flex align-items-center">
+        <div class="container">
+          <div class="text-center text-white">
+            <h1
+              class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp"
+            >
+              Our Creative Portfolio
+            </h1>
+            <p
+              class="lead fs-4 animate__animated animate__fadeInUp animate__delay-1s"
+            >
+              Transforming ideas into visual masterpieces
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Filter Navigation -->
+  <section class="filter-section py-5">
+    <div class="container">
+      <div class="filter-wrapper text-center mb-5">
+        <div
+          class="category-pills d-inline-flex flex-wrap justify-content-center gap-3"
+        >
+          <button
+            *ngFor="let category of categories"
+            class="btn btn-filter rounded-pill px-4 py-2"
+            [class.active]="selectedCategory === category"
+            (click)="filterItems(category)"
+          >
+            {{ category | titlecase }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Masonry Portfolio Grid -->
+      <div class="masonry-grid">
+        <div
+          *ngFor="let item of filteredItems"
+          class="masonry-item"
+          [@fadeInOut]
+        >
+          <div
+            class="portfolio-card"
+            (click)="openLightbox(item, portfolioModal)"
+          >
+            <div class="image-wrapper">
+              <img
+                [src]="item.imageUrl"
+                [alt]="item.title"
+                class="portfolio-image"
+              />
+              <div class="hover-overlay">
+                <div class="content">
+                  <span class="category-badge">{{ item.category }}</span>
+                  <h3 class="title">{{ item.title }}</h3>
+                  <button class="view-project-btn">View Project</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Modal -->
+  <ng-template #portfolioModal let-modal>
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close"
+        (click)="modal.dismiss()"
+      ></button>
+    </div>
+    <div class="modal-body p-0">
+      <div class="project-showcase">
+        <ngb-carousel
+          [interval]="5000"
+          [showNavigationArrows]="true"
+          [showNavigationIndicators]="true"
+        >
+          <ng-template ngbSlide>
+            <div class="carousel-image-container">
+              <img
+                [src]="selectedItem.imageUrl"
+                [alt]="selectedItem.title"
+                class="carousel-image"
+              />
+            </div>
+          </ng-template>
+          <ng-template ngbSlide *ngFor="let image of selectedItem.gallery">
+            <div class="carousel-image-container">
+              <img
+                [src]="image"
+                [alt]="selectedItem.title"
+                class="carousel-image"
+              />
+            </div>
+          </ng-template>
+        </ngb-carousel>
+        <div class="project-details p-5">
+          <div class="row">
+            <div class="col-lg-8">
+              <span class="category-tag">{{ selectedItem.category }}</span>
+              <h2 class="project-title">{{ selectedItem.title }}</h2>
+              <p class="project-description">{{ selectedItem.description }}</p>
+            </div>
+            <div class="col-lg-4">
+              <div class="project-meta">
+                <div class="meta-item">
+                  <h6>Client</h6>
+                  <p>{{ selectedItem.client }}</p>
+                </div>
+                <div class="meta-item">
+                  <h6>Completed</h6>
+                  <p>{{ selectedItem.completionDate | date : "mediumDate" }}</p>
+                </div>
+                <div class="meta-item">
+                  <h6>Tags</h6>
+                  <div class="tags-container">
+                    <span *ngFor="let tag of selectedItem.tags" class="tag">{{
+                      tag
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

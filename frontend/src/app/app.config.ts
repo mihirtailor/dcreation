@@ -3,15 +3,11 @@ import { provideRouter } from '@angular/router';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
-  withFetch,
 } from '@angular/common/http';
 import { routes } from './app.routes';
 import { JwtModule } from '@auth0/angular-jwt';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {
-  provideClientHydration,
-  provideProtractorTestingSupport,
-} from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideClientHydration } from '@angular/platform-browser';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -28,8 +24,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimationsAsync(),
+    provideAnimations(),
     provideClientHydration(),
-    provideProtractorTestingSupport(),
   ],
 };

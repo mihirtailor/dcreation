@@ -1,13 +1,19 @@
-<div class="services-container" [@fadeIn]>
+<div class="services-container">
   <!-- Hero Section -->
-  <section class="services-hero">
-    <div class="hero-image">
-      <img [src]="serviceHero.imageUrl" [alt]="serviceHero.title" />
-      <div class="hero-overlay">
+  <section class="services-hero position-relative">
+    <div class="hero-image w-100 h-100">
+      <img
+        [src]="serviceHero.imageUrl"
+        [alt]="serviceHero.title"
+        class="w-100 h-100 object-fit-cover"
+      />
+      <div
+        class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+      >
         <div class="container">
-          <div class="hero-content" [@fadeInUp]>
-            <h1>{{ serviceHero.title }}</h1>
-            <p class="lead">{{ serviceHero.subtitle }}</p>
+          <div class="hero-content text-center text-white">
+            <h1 class="display-3 fw-bold mb-3">{{ serviceHero.title }}</h1>
+            <p class="lead fs-4">{{ serviceHero.subtitle }}</p>
           </div>
         </div>
       </div>
@@ -15,15 +21,15 @@
   </section>
 
   <!-- Quick Navigation -->
-  <section class="services-navigation">
+  <section class="services-navigation py-4 bg-white shadow-sm sticky-top">
     <div class="container">
-      <div class="nav-categories">
+      <div class="d-flex flex-wrap justify-content-center gap-3">
         <button
-          class="nav-category"
           *ngFor="let category of serviceCategories"
+          class="btn btn-outline-primary rounded-pill px-4"
           (click)="scrollToCategory(category.id)"
         >
-          <i class="fas {{ category.icon }}"></i>
+          <i class="fas {{ category.icon }} me-2"></i>
           {{ category.name }}
         </button>
       </div>
@@ -31,35 +37,48 @@
   </section>
 
   <!-- Detailed Services -->
-  <section class="detailed-services">
+  <section class="py-5">
     <div class="container">
       <div
         *ngFor="let category of serviceCategories"
         [id]="'category-' + category.id"
-        class="service-category-block"
+        class="mb-5"
       >
-        <h2 class="category-title">{{ category.name }}</h2>
+        <div class="category-header bg-light p-4 rounded-3 mb-4">
+          <div class="d-flex align-items-center">
+            <i class="fas {{ category.icon }} fs-2 text-primary me-3"></i>
+            <h2 class="h3 mb-0 fw-bold">{{ category.name }}</h2>
+          </div>
+        </div>
+
         <div class="row g-4">
           <div
             class="col-md-6 col-lg-4"
             *ngFor="let service of category.services"
-            [@fadeInUp]
           >
-            <div class="service-card">
-              <div class="service-image">
-                <img [src]="service.image_url" [alt]="service.name" />
+            <div class="card h-100 service-card border-0 shadow-sm">
+              <div class="card-img-wrapper">
+                <img
+                  [src]="service.image_url"
+                  [alt]="service.name"
+                  class="card-img-top object-fit-cover"
+                  style="height: 200px"
+                />
               </div>
-              <div class="service-content">
-                <h3>{{ service.name }}</h3>
-                <p>{{ service.description }}</p>
-                <div class="price">{{ service.price }}</div>
-                <ul class="features-list">
-                  <li *ngFor="let feature of service.features">
-                    <i class="fas fa-check"></i> {{ feature }}
+              <div class="card-body d-flex flex-column">
+                <h3 class="h5 fw-bold mb-3">{{ service.name }}</h3>
+                <p class="card-text flex-grow-1">{{ service.description }}</p>
+                <div class="price h4 text-primary fw-bold mb-3">
+                  {{ service.price }}
+                </div>
+                <ul class="list-unstyled mb-4">
+                  <li class="mb-2" *ngFor="let feature of service.features">
+                    <i class="fas fa-check text-success me-2"></i>
+                    {{ feature }}
                   </li>
                 </ul>
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary w-100"
                   (click)="requestQuote(service.id)"
                 >
                   Request Quote
@@ -73,29 +92,29 @@
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials">
+  <section class="bg-light py-5">
     <div class="container">
-      <h2 class="text-center mb-5">What Our Clients Say</h2>
-      <div class="row">
-        <div
-          class="col-md-4"
-          *ngFor="let testimonial of testimonials"
-          [@fadeInUp]
-        >
-          <div class="testimonial-card">
-            <div class="testimonial-image">
-              <img [src]="testimonial.imageUrl" [alt]="testimonial.name" />
-            </div>
-            <div class="testimonial-content">
-              <p class="comment">{{ testimonial.comment }}</p>
-              <div class="rating">
+      <h2 class="text-center mb-5 fw-bold">What Our Clients Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4" *ngFor="let testimonial of testimonials">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <img
+                [src]="testimonial.imageUrl"
+                [alt]="testimonial.name"
+                class="rounded-circle mb-4"
+                width="80"
+                height="80"
+              />
+              <p class="card-text mb-4">{{ testimonial.comment }}</p>
+              <div class="text-warning mb-3">
                 <i
                   class="fas fa-star"
                   *ngFor="let star of [].constructor(testimonial.rating)"
                 ></i>
               </div>
-              <h4>{{ testimonial.name }}</h4>
-              <p class="company">{{ testimonial.company }}</p>
+              <h4 class="h6 fw-bold mb-1">{{ testimonial.name }}</h4>
+              <p class="text-muted small">{{ testimonial.company }}</p>
             </div>
           </div>
         </div>

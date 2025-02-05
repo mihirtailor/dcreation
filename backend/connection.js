@@ -30,6 +30,7 @@ connection.connect((error) => {
 const Contact = require("./models/contact")(sequelize);
 const Service = require("./models/service")(sequelize);
 const Category = require("./models/category")(sequelize);
+const Portfolio = require("./models/portfolio")(sequelize);
 
 // Test Sequelize connection
 sequelize
@@ -37,4 +38,11 @@ sequelize
     .then(() => console.log("Sequelize Connected!!!!"))
     .catch((error) => console.log(error));
 
-module.exports = { connection, sequelize, Contact, Service, Category };
+module.exports = {
+    connection,
+    sequelize,
+    Contact,
+    Service,
+    Category,
+    Portfolio,
+};
