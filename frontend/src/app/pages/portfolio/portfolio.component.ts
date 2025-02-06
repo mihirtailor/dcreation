@@ -14,7 +14,6 @@ import {
   NgbModule,
   NgbCarouselModule,
 } from '@ng-bootstrap/ng-bootstrap';
-import '@angular/localize/init';
 
 interface PortfolioItem {
   id: number;
