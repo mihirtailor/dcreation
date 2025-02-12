@@ -1,7 +1,7 @@
 // Variables
 $primary-dark: #1a1a1a;
 $accent-color: #00c896;
-$text-light: #ffffff;
+$text-light: #dee2e6;
 $background-blur: rgba(255, 255, 255, 0.08);
 
 .top-bar {
@@ -21,11 +21,11 @@ $background-blur: rgba(255, 255, 255, 0.08);
   }
 
   &.scrolled {
-    background: #1a1a1a; // Dark background
+    background: #dee2e6;
 
     .info-item,
     .social-icon {
-      color: #ffffff; // White text
+      color: #343a40;
 
       &:hover {
         color: $accent-color;
@@ -44,12 +44,12 @@ $background-blur: rgba(255, 255, 255, 0.08);
   align-items: center;
   gap: 8px;
   color: $text-light;
-  text-decoration: none;
-  font-size: 0.85rem;
+
+  font-size: 0.95rem;
   transition: all 0.3s ease;
 
   i {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   &:hover {
@@ -64,14 +64,15 @@ $background-blur: rgba(255, 255, 255, 0.08);
 }
 
 .social-icon {
-  color: $text-light;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
+  height: 24px;
   transition: all 0.3s ease;
-  padding: 6px;
+  padding: 0 6px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: $text-light;
 
   &:hover {
     color: $accent-color;

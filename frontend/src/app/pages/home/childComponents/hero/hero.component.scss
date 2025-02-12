@@ -1,3 +1,5 @@
+@import "@fontsource/bungee";
+
 .hero-section {
   height: 100vh;
   position: relative;
@@ -55,21 +57,6 @@
     opacity: 1;
   }
 
-  h2 {
-    font-size: var(--heading-2);
-    font-weight: 700;
-    font-family: "Playfair Display", serif;
-    margin-bottom: 1rem;
-    color: #ffe4e4;
-  }
-
-  p {
-    font-size: var(--body-text);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    color: #ffe4e4;
-  }
-
   .button-group {
     display: flex;
     gap: 1.5rem;
@@ -81,7 +68,7 @@
 .content h2 {
   font-size: var(--heading-2);
   font-weight: 700;
-  font-family: "Playfair Display", serif;
+  font-family: "Bungee";
   margin-bottom: 1rem;
   letter-spacing: 1px;
   color: #ffe4e4;
@@ -280,6 +267,7 @@
     transform: translateY(30px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -290,6 +278,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

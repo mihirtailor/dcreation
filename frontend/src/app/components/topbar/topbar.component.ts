@@ -14,6 +14,6 @@ export class TopbarComponent {
 
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 0;
+    this.isScrolled = window.scrollY > 50;
   }
 }
