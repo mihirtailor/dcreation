@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { SliderService } from '../../../../services/slider.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
@@ -15,7 +16,7 @@ export class HeroComponent implements OnInit, OnDestroy, AfterViewInit {
   private refreshInterval: any;
   isDataLoaded = false;
 
-  constructor(private sliderService: SliderService) {}
+  constructor(private sliderService: SliderService) { }
 
   ngOnInit() {
     this.sliderService.getSlides().subscribe(

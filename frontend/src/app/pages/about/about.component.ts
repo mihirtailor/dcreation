@@ -8,11 +8,12 @@ import {
   state,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
+import { ContactCtaComponent } from "../../components/contact-cta/contact-cta.component";
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ContactCtaComponent],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   animations: [
@@ -88,9 +89,9 @@ export class AboutComponent implements OnInit {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   navigateToContact(): void {
     this.router.navigate(['/contact']);

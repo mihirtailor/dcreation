@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mb-5">
       <div class="col-12 text-center" [@fadeInUp]>
-        <h2 class="display-4 fw-bold">Featured Work</h2>
+        <h2 class="display-4 heading-2">Featured Work</h2>
         <p class="lead text-muted">Discover our latest creative projects</p>
       </div>
     </div>
@@ -11,22 +11,13 @@
       <div class="col-md-4" *ngFor="let project of portfolioItems">
         <div class="portfolio-card h-100">
           <div class="card-img-wrapper">
-            <img
-              [src]="project.imageUrl"
-              [alt]="project.title"
-              class="card-img-top"
-            />
-            <div
-              class="card-img-overlay d-flex align-items-center justify-content-center"
-            >
+            <img [src]="project.imageUrl" [alt]="project.title" class="card-img-top" />
+            <div class="card-img-overlay d-flex align-items-center justify-content-center">
               <div class="overlay-content text-center">
                 <h5 class="card-title">{{ project.title }}</h5>
                 <p class="card-text">{{ project.category }}</p>
                 <div class="btn-group">
-                  <button
-                    class="btn btn-light me-2"
-                    (click)="viewProject(project)"
-                  >
+                  <button class="btn btn-light me-2" (click)="viewProject(project)">
                     <i class="fas fa-eye"></i> View
                   </button>
                   <button class="btn btn-outline-light">
@@ -42,10 +33,7 @@
 
     <div class="row mt-5">
       <div class="col-12 text-center" [@fadeInUp]>
-        <button
-          class="btn btn-primary btn-lg pulse-button"
-          routerLink="/portfolio"
-        >
+        <button class="btn btn-primary btn-lg pulse-button" routerLink="/portfolio">
           Explore Full Portfolio
           <i class="fas fa-arrow-right ms-2"></i>
         </button>

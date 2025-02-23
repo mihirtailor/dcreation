@@ -1,0 +1,40 @@
+.contact-cta {
+    padding: 50px 0;
+    background: linear-gradient(135deg, #27d088 0%, #1A6B47 100%);
+    margin-top: 60px;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: #ffffff; // Adding light text for better contrast
+    }
+
+    .lead {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        color: #e0e0e0; // Lightened text color for readability
+    }
+
+    .btn-primary {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        background-color: #dc3545;
+        border: none;
+        color: #ffffff;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        i {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover i {
+            transform: translateX(5px);
+        }
+    }
+}
