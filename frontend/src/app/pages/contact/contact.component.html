@@ -1,224 +1,103 @@
 <div class="hero-section">
   <div class="overlay">
-    <h1 class="text-center text-white">Request a Quote</h1>
+    <h1>Request a Quote</h1>
   </div>
 </div>
 
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div class="card shadow-lg">
-        <div class="card-body p-4">
-          <div *ngIf="showForm">
-            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-              <div class="row">
-                <!-- Left Column -->
-                <div class="col-md-6">
-                  <!-- Name Field -->
-                  <div class="mb-3">
-                    <label for="name" class="form-label fw-bold"
-                      >Full Name <span class="text-danger">*</span></label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      formControlName="name"
-                      [ngClass]="{
-                        'is-invalid':
-                          name?.invalid && (name?.dirty || name?.touched)
-                      }"
-                    />
-                    <div
-                      class="invalid-feedback"
-                      *ngIf="name?.invalid && (name?.dirty || name?.touched)"
-                    >
-                      <span *ngIf="name?.errors?.['required']"
-                        >Name is required</span
-                      >
-                      <span *ngIf="name?.errors?.['minlength']"
-                        >Name must be at least 2 characters long</span
-                      >
-                    </div>
-                  </div>
-
-                  <!-- Email Field -->
-                  <div class="mb-3">
-                    <label for="email" class="form-label fw-bold"
-                      >Email <span class="text-danger">*</span></label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      formControlName="email"
-                      [ngClass]="{
-                        'is-invalid':
-                          email?.invalid && (email?.dirty || email?.touched)
-                      }"
-                    />
-                    <div
-                      class="invalid-feedback"
-                      *ngIf="email?.invalid && (email?.dirty || email?.touched)"
-                    >
-                      <span *ngIf="email?.errors?.['required']"
-                        >Email is required</span
-                      >
-                      <span *ngIf="email?.errors?.['email']"
-                        >Please enter a valid email address</span
-                      >
-                    </div>
-                  </div>
-
-                  <!-- Phone Field -->
-                  <div class="mb-3">
-                    <label for="phone" class="form-label fw-bold"
-                      >Phone Number <span class="text-danger">*</span></label
-                    >
-                    <input
-                      type="tel"
-                      class="form-control"
-                      id="phone"
-                      formControlName="phone"
-                      [ngClass]="{
-                        'is-invalid':
-                          phone?.invalid && (phone?.dirty || phone?.touched)
-                      }"
-                    />
-                    <div
-                      class="invalid-feedback"
-                      *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
-                    >
-                      <span *ngIf="phone?.errors?.['pattern']"
-                        >Please enter a valid 10-digit phone number</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="col-md-6">
-                  <!-- Company Name Field -->
-                  <div class="mb-3">
-                    <label for="company" class="form-label fw-bold"
-                      >Company Name</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="company"
-                      formControlName="company"
-                    />
-                  </div>
-
-                  <!-- Service Field -->
-                  <div class="mb-3">
-                    <label for="service" class="form-label fw-bold"
-                      >Service Interested In
-                      <span class="text-danger">*</span></label
-                    >
-                    <select
-                      class="form-select"
-                      id="service"
-                      formControlName="service"
-                      [ngClass]="{
-                        'is-invalid':
-                          service?.invalid &&
-                          (service?.dirty || service?.touched)
-                      }"
-                    >
-                      <option value="">Select a service</option>
-                      <option value="web">Web Development</option>
-                      <option value="mobile">Mobile Development</option>
-                      <option value="design">UI/UX Design</option>
-                      <option value="consulting">IT Consulting</option>
-                    </select>
-                    <div
-                      class="invalid-feedback"
-                      *ngIf="
-                        service?.invalid && (service?.dirty || service?.touched)
-                      "
-                    >
-                      <span *ngIf="service?.errors?.['required']"
-                        >Please select a service</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Full Width Message Field -->
-                <div class="col-12">
-                  <div class="mb-3">
-                    <label for="message" class="form-label fw-bold"
-                      >Message <span class="text-danger">*</span></label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="message"
-                      rows="5"
-                      formControlName="message"
-                      [ngClass]="{
-                        'is-invalid':
-                          message?.invalid &&
-                          (message?.dirty || message?.touched)
-                      }"
-                    ></textarea>
-                    <div
-                      class="invalid-feedback"
-                      *ngIf="
-                        message?.invalid && (message?.dirty || message?.touched)
-                      "
-                    >
-                      <span *ngIf="message?.errors?.['required']"
-                        >Message is required</span
-                      >
-                      <span *ngIf="message?.errors?.['minlength']"
-                        >Message must be at least 10 characters long</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Form Description -->
-                <div class="col-12 mt-3">
-                  <div class="form-description">
-                    <p class="text-muted">
-                      <small>
-                        <span class="text-danger">*</span> Required fields<br />
-                        Please provide accurate information to help us better
-                        understand your requirements. We'll get back to you
-                        within 24-48 business hours.<br />
-                        Your information is secure and will not be shared with
-                        third parties.
-                      </small>
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary w-100">
-                    Submit Request
-                  </button>
-                </div>
+<div class="contact-form">
+  <div class="form-card">
+    <div *ngIf="showForm">
+      <form id="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+          <div class="form-left">
+            <div class="form-group">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input type="text" id="name" formControlName="name"
+                [ngClass]="{'invalid': name?.invalid && (name?.dirty || name?.touched)}" />
+              <div class="error-message" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                <span *ngIf="name?.errors?.['required']">Name is required</span>
+                <span *ngIf="name?.errors?.['minlength']">Name must be at least 2 characters long</span>
               </div>
-            </form>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email <span class="required">*</span></label>
+              <input type="email" id="email" formControlName="email"
+                [ngClass]="{'invalid': email?.invalid && (email?.dirty || email?.touched)}" />
+              <div class="error-message" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <span *ngIf="email?.errors?.['required']">Email is required</span>
+                <span *ngIf="email?.errors?.['email']">Please enter a valid email address</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <input type="tel" id="phone" formControlName="phone"
+                [ngClass]="{'invalid': phone?.invalid && (phone?.dirty || phone?.touched)}" />
+              <div class="error-message" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
+                <span *ngIf="phone?.errors?.['pattern']">Please enter a valid 10-digit phone number</span>
+              </div>
+            </div>
           </div>
-          <!-- Success Message Section -->
-          <div *ngIf="!showForm" class="text-center py-5">
-            <i
-              class="fas fa-check-circle text-success"
-              style="font-size: 48px"
-            ></i>
-            <h2 class="mt-4">Thank You!</h2>
-            <p class="lead">Your request has been submitted successfully.</p>
-            <p>We'll get back to you within 24-48 business hours.</p>
+
+          <div class="form-right">
+            <div class="form-group">
+              <label for="company">Company Name</label>
+              <input type="text" id="company" formControlName="company" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service Interested In <span class="required">*</span></label>
+              <select id="service" formControlName="service"
+                [ngClass]="{'invalid': service?.invalid && (service?.dirty || service?.touched)}">
+                <option value="">Select a service</option>
+                <option *ngFor="let service of services" [value]="service.id">
+                  {{ service.name }}
+                </option>
+              </select>
+              <div class="error-message" *ngIf="service?.invalid && (service?.dirty || service?.touched)">
+                <span *ngIf="service?.errors?.['required']">Please select a service</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-full">
+            <div class="form-group">
+              <label for="message">Message <span class="required">*</span></label>
+              <textarea id="message" rows="5" formControlName="message"
+                [ngClass]="{'invalid': message?.invalid && (message?.dirty || message?.touched)}"></textarea>
+              <div class="error-message" *ngIf="message?.invalid && (message?.dirty || message?.touched)">
+                <span *ngIf="message?.errors?.['required']">Message is required</span>
+                <span *ngIf="message?.errors?.['minlength']">Message must be at least 10 characters long</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-info">
+            <p>
+              <span class="required">*</span> Required fields<br />
+              Please provide accurate information to help us better understand your requirements.
+              We'll get back to you within 24-48 business hours.<br />
+              Your information is secure and will not be shared with third parties.
+            </p>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="submit-button">Submit Request</button>
           </div>
         </div>
-      </div>
+      </form>
+    </div>
+
+    <div *ngIf="!showForm" class="success-message">
+      <i class="fas fa-check-circle success-icon"></i>
+      <h2>Thank You!</h2>
+      <p class="message-primary">Your request has been submitted successfully.</p>
+      <p class="message-secondary">We'll get back to you within 24-48 business hours.</p>
     </div>
   </div>
 </div>
-<div class="container my-5">
+
+<div class="location-section">
   <app-office-location></app-office-location>
 </div>

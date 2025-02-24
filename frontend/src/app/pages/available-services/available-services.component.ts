@@ -58,7 +58,7 @@ export class AvailableServicesComponent implements OnInit {
     private router: Router,
     private viewportScroller: ViewportScroller,
     private availableService: AvailableService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCategoriesAndServices();
@@ -82,6 +82,11 @@ export class AvailableServicesComponent implements OnInit {
   }
 
   requestQuote(serviceId: number): void {
-    this.router.navigate(['/contact'], { queryParams: { service: serviceId } });
+    this.router.navigate(['/contact'], {
+      queryParams: { service: serviceId }
+    }).then(() => {
+      window.scrollTo(0, 0);
+    });
   }
+
 }

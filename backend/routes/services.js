@@ -13,7 +13,7 @@ const uploadMiddleware = fileUpload({
 // Routes
 router.get("/services", serviceController.getAllServices);
 router.post("/services", uploadMiddleware, serviceController.createService);
-router.put("/services/:id", serviceController.updateService);
+router.put("/services/:id", uploadMiddleware, serviceController.updateService);
 router.delete("/services/:id", serviceController.deleteService);
 
 // Category routes

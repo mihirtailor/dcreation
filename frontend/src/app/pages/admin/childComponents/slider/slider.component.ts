@@ -111,6 +111,27 @@ export class SliderComponent implements OnInit {
       });
   }
 
+  onUpdateImageSelected(event: any, slide: Slide) {
+    const file = event.target.files[0];
+    if (file && this.isValidImageFile(file)) {
+      this.isLoading = true;
+      const formData = new FormData();
+      formData.append('image', file);
+
+      this.sliderService.updateSlideImage(slide.id, formData).subscribe({
+        next: (response: any) => {
+          slide.image_url = response.url;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error updating image:', error);
+          this.isLoading = false;
+        }
+      });
+    }
+  }
+
+
   private isValidImageFile(file: File): boolean {
     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
     return allowedTypes.includes(file.type);

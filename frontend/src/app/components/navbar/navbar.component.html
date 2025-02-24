@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-lg" [ngClass]="{ scrolled: isScrolled }" [@fadeInOut]>
   <div class="container">
     <a class="navbar-brand" href="#">
-      <span class="brand-highlight">D</span>'Creation
+      <img *ngIf="!isScrolled" src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740333058/Logo_5_bzcxuq.png"
+        alt="D'Creation Logo" height="40" class="brand-logo">
+      <img *ngIf="isScrolled" src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740332265/logo_1_u9bofn.png"
+        alt="D'Creation Logo Scrolled" height="40" class="brand-logo">
     </a>
 
     <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="!isCollapsed">

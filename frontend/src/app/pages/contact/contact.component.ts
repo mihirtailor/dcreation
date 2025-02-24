@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { OfficeLocationComponent } from '../../components/office-location/office-location.component';
 import { ContactService } from '../../services/contact.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface ContactForm {
   name: string;
@@ -35,12 +36,33 @@ export class ContactComponent implements OnInit {
   showForm = true;
   contactForm!: FormGroup;
   contactService: ContactService = inject(ContactService);
+  services: any[] = [];
+  private fb: FormBuilder = inject(FormBuilder);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor(private fb: FormBuilder) {}
+  constructor() { }
 
   ngOnInit(): void {
+    this.loadServices();
     this.initForm();
     this.setupFormValidation();
+    this.handleQueryParams();
+  }
+
+  private loadServices(): void {
+    this.contactService.getServices().subscribe(services => {
+      this.services = services;
+    });
+  }
+
+  private handleQueryParams(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['service']) {
+        this.contactForm.patchValue({
+          service: params['service']
+        });
+      }
+    });
   }
 
   private initForm(): void {

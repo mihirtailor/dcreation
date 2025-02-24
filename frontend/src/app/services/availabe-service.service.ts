@@ -21,6 +21,8 @@ export interface Service {
   categoryId: number;
   order_number: number;
   isEditing?: boolean;
+  newImage?: File | null;
+  previewUrl?: string;
 }
 
 @Injectable({
@@ -29,7 +31,7 @@ export interface Service {
 export class AvailableService {
   private apiUrl = 'http://localhost:5000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Service methods
   getServices(): Observable<Service[]> {
@@ -40,8 +42,8 @@ export class AvailableService {
     return this.http.post<Service>(`${this.apiUrl}/services`, formData);
   }
 
-  updateService(id: number, data: Partial<Service>): Observable<Service> {
-    return this.http.put<Service>(`${this.apiUrl}/services/${id}`, data);
+  updateService(id: number, formData: FormData) {
+    return this.http.put<Service>(`${this.apiUrl}/services/${id}`, formData);
   }
 
   deleteService(id: number): Observable<void> {

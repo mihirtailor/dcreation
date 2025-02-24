@@ -185,20 +185,97 @@ export class ServicesComponent implements OnInit {
     }
   }
 
+  onEditFileSelected(event: any, service: Service) {
+    const file = event.target.files[0];
+    if (file && this.isValidImageFile(file)) {
+      service.newImage = file;
+      // Add immediate preview
+      service.previewUrl = URL.createObjectURL(file);
+    } else {
+      this.snackBar.open('Please select a valid image file (JPG, PNG, or GIF)', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar'],
+      });
+      event.target.value = '';
+    }
+  }
+
+  uploadImagePreview(service: Service) {
+    if (!service.newImage) return;
+
+    const formData = new FormData();
+    formData.append('image', service.newImage);
+
+    this.availableServices.updateService(service.id, formData).subscribe({
+      next: (updatedService) => {
+        service.image_url = updatedService.image_url;
+        if (service.previewUrl) {
+          URL.revokeObjectURL(service.previewUrl);
+          delete service.previewUrl;
+        }
+        service.newImage = null;
+        this.snackBar.open('Image updated successfully!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
+      },
+      error: (error) => {
+        this.snackBar.open('Error updating image', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+      }
+    });
+  }
+
   updateService(service: Service) {
     this.isLoading = true;
-    this.availableServices.updateService(service.id, service).subscribe({
-      next: () => {
-        this.loadServices();
-        service.isEditing = false;
+    const formData = new FormData();
+
+    formData.append('name', service.name);
+    formData.append('description', service.description);
+    formData.append('price', service.price);
+    formData.append('categoryId', service.categoryId.toString());
+    formData.append('features', JSON.stringify(service.features));
+
+    if (service.newImage) {
+      formData.append('image', service.newImage);
+    }
+
+    this.availableServices.updateService(service.id, formData).subscribe({
+      next: (updatedService) => {
+        const index = this.services.findIndex(s => s.id === service.id);
+        if (index !== -1) {
+          this.services[index] = { ...updatedService, isEditing: false };
+        }
+
+        this.snackBar.open('Service updated successfully!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
         this.isLoading = false;
       },
       error: (error) => {
+        this.snackBar.open('Error updating service', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
         console.error('Error updating service:', error);
         this.isLoading = false;
       },
     });
   }
+
 
   updateCategory(category: Category) {
     this.isLoading = true;

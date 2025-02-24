@@ -7,12 +7,7 @@
     <form [formGroup]="categoryForm" (ngSubmit)="createCategory()" class="mb-4">
       <div class="mb-3">
         <label class="form-label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="name"
-          required
-        />
+        <input type="text" class="form-control" formControlName="name" required />
       </div>
 
       <div class="mb-3">
@@ -35,19 +30,10 @@
 
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea
-          class="form-control"
-          rows="4"
-          formControlName="description"
-          required
-        ></textarea>
+        <textarea class="form-control" rows="4" formControlName="description" required></textarea>
       </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary w-100"
-        [disabled]="!categoryForm.valid"
-      >
+      <button type="submit" class="btn btn-primary w-100" [disabled]="!categoryForm.valid">
         Add Category
       </button>
     </form>
@@ -64,16 +50,10 @@
             </p>
             <p class="card-text flex-grow-1">{{ category.description }}</p>
             <div class="d-flex gap-2 mt-auto">
-              <button
-                class="btn btn-outline-primary flex-grow-1"
-                (click)="category.isEditing = true"
-              >
+              <button class="btn btn-outline-primary flex-grow-1" (click)="category.isEditing = true">
                 Edit
               </button>
-              <button
-                class="btn btn-outline-danger flex-grow-1"
-                (click)="deleteCategory(category.id)"
-              >
+              <button class="btn btn-outline-danger flex-grow-1" (click)="deleteCategory(category.id)">
                 Delete
               </button>
             </div>
@@ -83,11 +63,7 @@
         <!-- Category Edit Mode -->
         <div class="card h-100" *ngIf="category.isEditing">
           <div class="card-body">
-            <input
-              type="text"
-              class="form-control mb-3"
-              [(ngModel)]="category.name"
-            />
+            <input type="text" class="form-control mb-3" [(ngModel)]="category.name" />
             <div class="mb-3">
               <select class="form-select" [(ngModel)]="category.icon">
                 <option value="fa-print">🖨️ Print</option>
@@ -103,21 +79,12 @@
                 <i class="fas {{ category.icon }}"></i>
               </div>
             </div>
-            <textarea
-              class="form-control mb-3"
-              [(ngModel)]="category.description"
-            ></textarea>
+            <textarea class="form-control mb-3" [(ngModel)]="category.description"></textarea>
             <div class="d-flex gap-2">
-              <button
-                class="btn btn-primary flex-grow-1"
-                (click)="updateCategory(category)"
-              >
+              <button class="btn btn-primary flex-grow-1" (click)="updateCategory(category)">
                 Save
               </button>
-              <button
-                class="btn btn-secondary flex-grow-1"
-                (click)="category.isEditing = false"
-              >
+              <button class="btn btn-secondary flex-grow-1" (click)="category.isEditing = false">
                 Cancel
               </button>
             </div>
@@ -145,73 +112,35 @@
 
       <div class="mb-3">
         <label class="form-label">Image</label>
-        <input
-          type="file"
-          class="form-control"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-          required
-        />
+        <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*" required />
       </div>
 
       <div class="mb-3">
         <label class="form-label">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="name"
-          required
-        />
+        <input type="text" class="form-control" formControlName="name" required />
       </div>
 
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea
-          class="form-control"
-          rows="4"
-          formControlName="description"
-          required
-        ></textarea>
+        <textarea class="form-control" rows="4" formControlName="description" required></textarea>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Price</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="price"
-          required
-        />
+        <input type="text" class="form-control" formControlName="price" required />
       </div>
 
       <div class="mb-3">
         <label class="form-label">Features</label>
         <div formArrayName="features">
-          <div
-            class="d-flex gap-2 mb-2"
-            *ngFor="let feature of features.controls; let i = index"
-          >
-            <input
-              type="text"
-              class="form-control"
-              [formControlName]="i"
-              required
-            />
-            <button
-              type="button"
-              class="btn btn-danger"
-              (click)="removeFeatureField(i)"
-              *ngIf="features.length > 1"
-            >
+          <div class="d-flex gap-2 mb-2" *ngFor="let feature of features.controls; let i = index">
+            <input type="text" class="form-control" [formControlName]="i" required />
+            <button type="button" class="btn btn-danger" (click)="removeFeatureField(i)" *ngIf="features.length > 1">
               Remove
             </button>
           </div>
         </div>
-        <button
-          type="button"
-          class="btn btn-success mt-2"
-          (click)="addFeatureField()"
-        >
+        <button type="button" class="btn btn-success mt-2" (click)="addFeatureField()">
           Add Feature
         </button>
       </div>
@@ -228,21 +157,14 @@
           {{ category.name }}
         </h3>
         <div class="row g-4">
-          <div
-            class="col-md-4"
-            *ngFor="let service of getServicesByCategory(category.id)"
-          >
+          <div class="col-md-4" *ngFor="let service of getServicesByCategory(category.id)">
             <!-- Service View Mode -->
             <div class="card h-100" *ngIf="!service.isEditing">
-              <img
-                [src]="service.image_url"
-                class="card-img-top"
-                [alt]="service.name"
-              />
+              <img [src]="service.image_url" class="card-img-top" [alt]="service.name" style="height: 200px;" />
               <div class="card-body d-flex flex-column">
                 <span class="badge bg-primary mb-2">{{
                   getCategoryName(service.categoryId)
-                }}</span>
+                  }}</span>
                 <h5 class="card-title">{{ service.name }}</h5>
                 <p class="card-text">{{ service.description }}</p>
                 <p class="text-success fw-bold">{{ service.price }}</p>
@@ -252,16 +174,10 @@
                   </li>
                 </ul>
                 <div class="d-flex gap-2 mt-auto">
-                  <button
-                    class="btn btn-outline-primary flex-grow-1"
-                    (click)="service.isEditing = true"
-                  >
+                  <button class="btn btn-outline-primary flex-grow-1" (click)="service.isEditing = true">
                     Edit
                   </button>
-                  <button
-                    class="btn btn-outline-danger flex-grow-1"
-                    (click)="deleteService(service.id)"
-                  >
+                  <button class="btn btn-outline-danger flex-grow-1" (click)="deleteService(service.id)">
                     Delete
                   </button>
                 </div>
@@ -271,54 +187,39 @@
             <!-- Service Edit Mode -->
             <div class="card h-100" *ngIf="service.isEditing">
               <div class="card-body">
-                <select
-                  class="form-select mb-3"
-                  [(ngModel)]="service.categoryId"
-                >
-                  <option
-                    *ngFor="let category of categories"
-                    [value]="category.id"
-                  >
+                <!-- Add image update input -->
+                <!-- Service Edit Mode - Image Section -->
+                <div class="mb-3">
+                  <label class="form-label">Update Image</label>
+                  <div class="d-flex gap-2 mb-2">
+                    <input type="file" class="form-control" (change)="onEditFileSelected($event, service)"
+                      accept="image/*" />
+                    <button class="btn btn-primary" (click)="uploadImagePreview(service)"
+                      [disabled]="!service.newImage">
+                      Upload
+                    </button>
+                  </div>
+                  <img [src]="service.image_url" class="mt-2 img-thumbnail" style="height: 100px" />
+                </div>
+
+                <select class="form-select mb-3" [(ngModel)]="service.categoryId">
+                  <option *ngFor="let category of categories" [value]="category.id">
                     {{ category.name }}
                   </option>
                 </select>
-                <input
-                  type="text"
-                  class="form-control mb-3"
-                  [(ngModel)]="service.name"
-                />
-                <textarea
-                  class="form-control mb-3"
-                  [(ngModel)]="service.description"
-                ></textarea>
-                <input
-                  type="text"
-                  class="form-control mb-3"
-                  [(ngModel)]="service.price"
-                />
+                <input type="text" class="form-control mb-3" [(ngModel)]="service.name" />
+                <textarea class="form-control mb-3" [(ngModel)]="service.description"></textarea>
+                <input type="text" class="form-control mb-3" [(ngModel)]="service.price" />
                 <div class="edit-features mb-3">
-                  <div
-                    class="mb-2"
-                    *ngFor="let feature of service.features; let i = index"
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      [(ngModel)]="service.features[i]"
-                    />
+                  <div class="mb-2" *ngFor="let feature of service.features; let i = index">
+                    <input type="text" class="form-control" [(ngModel)]="service.features[i]" />
                   </div>
                 </div>
                 <div class="d-flex gap-2">
-                  <button
-                    class="btn btn-primary flex-grow-1"
-                    (click)="updateService(service)"
-                  >
+                  <button class="btn btn-primary flex-grow-1" (click)="updateService(service)">
                     Save
                   </button>
-                  <button
-                    class="btn btn-secondary flex-grow-1"
-                    (click)="service.isEditing = false"
-                  >
+                  <button class="btn btn-secondary flex-grow-1" (click)="service.isEditing = false">
                     Cancel
                   </button>
                 </div>

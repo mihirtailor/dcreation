@@ -1,23 +1,146 @@
-// Only custom styles that extend Bootstrap
+.services-container {
+  font-family: var(--font-family-primary);
+}
+
 .services-hero {
+  position: relative;
   height: 60vh;
 
+  .hero-image {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    text-align: center;
+    color: var(--text-light-color);
+
+    h1 {
+      font-size: var(--heading-1);
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+
+    p {
+      font-size: var(--heading-4);
+    }
   }
 }
 
+.services-navigation {
+  padding: var(--spacing-md) 0;
+  background: var(--text-light-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .navigation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+
+  .nav-button {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: var(--spacing-sm) var(--spacing-xl);
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    i {
+      margin-right: var(--spacing-sm);
+    }
+
+    &:hover {
+      background: var(--primary-color);
+      color: var(--text-light-color);
+    }
+  }
+}
+
+.services-section {
+  padding: var(--spacing-xl) 0;
+
+  .category-wrapper {
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+.category-header {
+  background: var(--light-gray);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-lg);
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    i {
+      color: var(--primary-color);
+      font-size: var(--heading-2);
+    }
+
+    h2 {
+      color: var(--text-dark-color);
+      font-size: var(--heading-3);
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
 .service-card {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  background: var(--text-light-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   transition: transform 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   .card-img-wrapper {
-    overflow: hidden;
+    height: 200px;
+    flex-shrink: 0;
 
     img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transition: transform 0.3s ease;
 
       &:hover {
@@ -25,11 +148,157 @@
       }
     }
   }
+
+  .card-content {
+    height: 400px;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+
+    .top-content {
+      flex: 1;
+
+      h3 {
+        font-size: var(--heading-4);
+        color: var(--text-dark-color);
+        margin-bottom: var(--spacing-md);
+        font-weight: 700;
+      }
+
+      .description {
+        color: var(--dark-gray);
+        margin-bottom: var(--spacing-lg);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.4;
+        min-height: 2.8em;
+      }
+
+      .price {
+        color: var(--primary-color);
+        font-size: var(--heading-4);
+        font-weight: 700;
+        margin-bottom: var(--spacing-md);
+      }
+    }
+
+    .bottom-content {
+      margin-top: auto;
+
+      .features-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--spacing-lg);
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          margin-bottom: var(--spacing-sm);
+
+          i {
+            color: var(--secondary-color);
+          }
+        }
+      }
+
+      .quote-button {
+        width: 100%;
+        background: var(--primary-color);
+        color: var(--text-light-color);
+        border: none;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--border-radius-sm);
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background: var(--primary-dark-color);
+        }
+      }
+    }
+  }
 }
 
-// Media Queries
+.testimonials-section {
+  background: var(--light-gray);
+  padding: var(--spacing-xl) 0;
+
+  h2 {
+    text-align: center;
+    color: var(--text-dark-color);
+    font-size: var(--heading-2);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.testimonial-card {
+  background: var(--text-light-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .testimonial-content {
+    padding: var(--spacing-lg);
+    text-align: center;
+
+    .testimonial-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    p {
+      color: var(--dark-gray);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .rating {
+      color: #ffc107;
+      margin-bottom: var(--spacing-md);
+    }
+
+    h4 {
+      font-size: var(--body-text);
+      color: var(--text-dark-color);
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .company {
+      color: var(--dark-gray);
+      font-size: var(--body-text-small);
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .services-hero {
     height: 40vh;
+
+    .hero-content {
+      h1 {
+        font-size: var(--heading-2);
+      }
+    }
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
   }
 }

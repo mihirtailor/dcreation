@@ -2,7 +2,6 @@ const { Service } = require("../connection");
 const cloudinary = require("../config/cloudinary");
 
 const serviceController = {
-    // Get all services with their categories
     getAllServices: async (req, res) => {
         try {
             const services = await Service.findAll();
@@ -12,7 +11,6 @@ const serviceController = {
         }
     },
 
-    // Create new service
     createService: async (req, res) => {
         try {
             const result = await cloudinary.uploader.upload(
@@ -38,7 +36,6 @@ const serviceController = {
         }
     },
 
-    // Update service
     updateService: async (req, res) => {
         try {
             const service = await Service.findByPk(req.params.id);
@@ -46,14 +43,34 @@ const serviceController = {
                 return res.status(404).json({ message: "Service not found" });
             }
 
-            await service.update(req.body);
-            res.json(service);
+            if (req.files && req.files.image) {
+                await cloudinary.uploader.destroy(service.public_id);
+                const result = await cloudinary.uploader.upload(
+                    req.files.image.tempFilePath,
+                    {
+                        folder: "services",
+                    }
+                );
+
+                await service.update({
+                    image_url: result.secure_url,
+                    public_id: result.public_id
+                });
+            }
+
+            const updateData = { ...req.body };
+            if (updateData.features) {
+                updateData.features = JSON.parse(updateData.features);
+            }
+
+            await service.update(updateData);
+            const updatedService = await Service.findByPk(req.params.id, { raw: true });
+            res.json(updatedService);
         } catch (error) {
             res.status(500).json({ message: "Error updating service", error });
         }
     },
 
-    // Delete service
     deleteService: async (req, res) => {
         try {
             const service = await Service.findByPk(req.params.id);

@@ -78,6 +78,56 @@ router.put("/slider/:id", (req, res) => {
     );
 });
 
+router.put("/slider/:id/image",
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+    }),
+    async (req, res) => {
+        try {
+            if (!req.files || !req.files.image) {
+                return res.status(400).json({ message: "No file uploaded" });
+            }
+
+            // Get the old image public_id first
+            const selectQuery = "SELECT public_id FROM sliders WHERE id = ?";
+            connection.query(selectQuery, [req.params.id], async (error, results) => {
+                if (error) throw error;
+                if (results.length > 0) {
+                    // Delete old image from Cloudinary
+                    await cloudinary.uploader.destroy(results[0].public_id);
+
+                    // Upload new image
+                    const file = req.files.image;
+                    const result = await cloudinary.uploader.upload(file.tempFilePath, {
+                        folder: "slider",
+                    });
+
+                    // Update database with new image details
+                    const updateQuery = "UPDATE sliders SET image_url = ?, public_id = ? WHERE id = ?";
+                    connection.query(
+                        updateQuery,
+                        [result.secure_url, result.public_id, req.params.id],
+                        (error, results) => {
+                            if (error) throw error;
+                            res.json({
+                                message: "Image updated successfully",
+                                url: result.secure_url,
+                                public_id: result.public_id
+                            });
+                        }
+                    );
+                } else {
+                    res.status(404).json({ message: "Slider not found" });
+                }
+            });
+        } catch (error) {
+            res.status(500).json({ message: "Image update failed", error });
+        }
+    }
+);
+
+
 // Delete slider image
 router.delete("/slider/:id", async (req, res) => {
     try {

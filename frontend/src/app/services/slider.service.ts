@@ -16,7 +16,7 @@ export interface Slide {
 export class SliderService {
   private apiUrl = 'http://localhost:5000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   uploadSlide(formData: FormData): Observable<Slide> {
     return this.http.post<Slide>(`${this.apiUrl}/upload`, formData);
@@ -28,6 +28,10 @@ export class SliderService {
 
   updateSlide(id: number, data: Partial<Slide>): Observable<Slide> {
     return this.http.put<Slide>(`${this.apiUrl}/slider/${id}`, data);
+  }
+
+  updateSlideImage(id: number, formData: FormData) {
+    return this.http.put(`${this.apiUrl}/slider/${id}/image`, formData);
   }
 
   deleteSlide(id: number): Observable<void> {
