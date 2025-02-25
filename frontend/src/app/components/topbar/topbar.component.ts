@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
@@ -12,8 +13,18 @@ export class TopbarComponent {
   isScrolled = false;
   email = 'info@yourcompany.com';
 
+  constructor(private router: Router) { }
+
+  get isHomePage(): boolean {
+    return this.router.url === '/home' || this.router.url === '/';
+  }
+
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 50;
+    if (this.isHomePage) {
+      this.isScrolled = window.scrollY > 50;
+    } else {
+      this.isScrolled = true;
+    }
   }
 }

@@ -1,92 +1,177 @@
 <div class="about-container" [@fadeIn]>
   <!-- Hero Section -->
-  <section class="hero-section">
+  <section class="hero-section parallax-bg">
     <div class="hero-image">
-      <img src="assets/images/hero/slide1.jpg" alt="Design Studio" />
-      <div class="hero-overlay">
-        <div class="container">
-          <div class="hero-content" [@fadeInUp]>
-            <h1 class="heading-1">Crafting Visual Excellence</h1>
-            <p class="lead">
-              Where Creative Design Meets Professional Print Solutions
-            </p>
-          </div>
-        </div>
-      </div>
+      <img src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740445089/welcome_image_j74gio.jpg"
+        alt="Design Studio" />
     </div>
   </section>
 
-  <!-- Owner Introduction -->
-  <section class="owner-section">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-5" [@slideInLeft]>
-          <div class="owner-image">
-            <img src="assets/images/hero/slide2.jpg" alt="Owner Name" class="rounded shadow" />
-          </div>
-        </div>
-        <div class="col-lg-7" [@slideInRight]>
-          <div class="owner-content">
-            <h2 class="heading-2">{{ ownerName }}</h2>
-            <p class="subtitle">Founder & Creative Director</p>
-            <p class="owner-bio">{{ ownerBio }}</p>
-            <div class="owner-expertise">
-              <span class="expertise-tag">Graphic Design</span>
-              <span class="expertise-tag">Print Solutions</span>
-              <span class="expertise-tag">Brand Strategy</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Overview -->
-  <section class="services-overview">
-    <div class="container">
-      <h2 class="text-center mb-5" [@fadeInUp]>What We Offer</h2>
-      <div class="row g-4">
-        <div class="col-md-4" *ngFor="let service of services" [@fadeInUp]>
-          <div class="service-card">
-            <div class="icon-wrapper">
-              <i [class]="service.icon"></i>
-            </div>
-            <h3>{{ service.title }}</h3>
-            <p>{{ service.description }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section class="experience-section">
+  <!-- Owner Story Section -->
+  <section class="owner-story py-5">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-6" [@slideInLeft]>
-          <div class="experience-content">
-            <h2>Years of Excellence</h2>
-            <div class="stats-container">
-              <div class="stat-item">
-                <h3>{{ yearsInBusiness }}+</h3>
-                <p>Years in Business</p>
-              </div>
-              <div class="stat-item">
-                <h3>{{ completedProjects }}+</h3>
-                <p>Projects Completed</p>
-              </div>
-              <div class="stat-item">
-                <h3>{{ satisfiedClients }}+</h3>
-                <p>Happy Clients</p>
-              </div>
-            </div>
+          <div class="owner-image">
+            <img src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740448060/profilepic_nzsdok.jpg"
+              alt="{{ ownerName }}" class="img-fluid rounded-3 shadow">
           </div>
         </div>
         <div class="col-lg-6" [@slideInRight]>
-          <img src="assets/images/hero/slide1.jpg" alt="Our Workspace" class="img-fluid rounded shadow-lg" />
+          <div class="owner-content">
+            <h2>{{ ownerName }}</h2>
+            <p class="position">Founder & Creative Director</p>
+            <div class="story">
+              <p>With over 30 years of experience in the graphic design, printing, and advertising industry, D'Creation
+                has become a trusted name for delivering creative excellence and quality craftsmanship. Founded on a
+                passion for innovative design and precision printing, we specialize in bringing ideas to life through
+                impactful visuals and customized solutions.</p>
+              <p>At the heart of D'Creation is a commitment to understanding our clients' unique needs and transforming
+                their vision into reality. From eye-catching branding and professional print materials to comprehensive
+                advertising solutions, we ensure every project reflects creativity, quality, and attention to detail.
+              </p>
+              <p>With decades of industry expertise, we continue to evolve with the latest trends and technologies,
+                helping businesses stand out and make a lasting impression.</p>
+            </div>
+            <div class="expertise-tags">
+              <span class="tag">Brand Strategy</span>
+              <span class="tag">Graphic Design</span>
+              <span class="tag">Print Solutions</span>
+              <span class="tag">Digital Marketing</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <shared-contact-cta></shared-contact-cta>
+
+  <!-- Philosophy Section -->
+  <section class="philosophy-section py-5 bg-light">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6" [@slideInLeft]>
+          <div class="philosophy-card">
+            <h3>Our Approach</h3>
+            <p>{{ approach }}</p>
+          </div>
+        </div>
+        <div class="col-md-6" [@slideInRight]>
+          <div class="philosophy-card">
+            <h3>Our Promise</h3>
+            <p>{{ promise }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Services</h2>
+      <div class="services-wrapper">
+        <div class="service-card" *ngFor="let service of services" [@fadeInUp]>
+          <div class="service-icon-wrapper">
+            <i [class]="service.icon"></i>
+          </div>
+          <div class="service-content">
+            <h4 class="service-title">{{service.title}}</h4>
+            <p class="service-description">{{service.description}}</p>
+            <div class="service-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="achievements-section py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Impact By Numbers</h2>
+      <div class="achievements-wrapper">
+        <div class="achievement-card" *ngFor="let stat of statistics" [@fadeInUp]>
+          <div class="achievement-icon-wrapper">
+            <i [class]="stat.icon"></i>
+          </div>
+          <div class="achievement-content">
+            <div class="counter-wrapper">
+              <span class="number" [countUp]="stat.count">0</span>
+              <span class="plus">+</span>
+            </div>
+            <h4 class="achievement-title">{{stat.title}}</h4>
+            <div class="achievement-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="certificates-section py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Awards & Certifications</h2>
+      <div class="row g-4">
+        <div class="col-md-4" [@fadeInUp]>
+          <div class="certificate-card">
+            <img src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740448967/Certifacate_1_ya9xcl.jpg"
+              alt="Certificate 1" class="img-fluid rounded shadow">
+          </div>
+        </div>
+        <div class="col-md-4" [@fadeInUp]>
+          <div class="certificate-card">
+            <img
+              src="https://res.cloudinary.com/dqfwg0the/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1740456169/certificate_2_gjipms.jpg"
+              alt="Certificate 2" class="img-fluid rounded shadow">
+          </div>
+        </div>
+        <div class="col-md-4" [@fadeInUp]>
+          <div class="certificate-card">
+            <img src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740448967/Certifacate_1_ya9xcl.jpg"
+              alt="Certificate 3" class="img-fluid rounded shadow">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Testimonials -->
+  <section class="testimonials-section py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Client Success Stories</h2>
+      <ngb-carousel [interval]="4000" [showNavigationArrows]="true" [showNavigationIndicators]="true">
+        <ng-template ngbSlide *ngFor="let testimonial of testimonials">
+          <div class="testimonial-card text-center">
+            <div class="quote-icon">
+              <i class="fas fa-quote-right"></i>
+            </div>
+            <h4 class="testimonial-title mb-4">{{testimonial.title}}</h4>
+            <p class="testimonial-text">{{testimonial.text}}</p>
+            <div class="client-info mt-4">
+              <h5 class="client-name mb-2">{{testimonial.name}}</h5>
+              <p class="client-company">{{testimonial.company}}</p>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="featured-work py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Featured Projects</h2>
+      <div class="row g-4">
+        <div class="col-md-4" *ngFor="let project of featuredProjects" [@fadeInUp]>
+          <div class="project-card">
+            <img [src]="project.image" [alt]="project.title" class="img-fluid">
+            <div class="project-info">
+              <h4>{{project.title}}</h4>
+              <p>{{project.category}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+<shared-contact-cta></shared-contact-cta>

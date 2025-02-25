@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   trigger,
   style,
@@ -27,6 +28,12 @@ export class NavbarComponent {
   isCollapsed = true;
   activeLink = '#home';
 
+  constructor(private router: Router) { }
+
+  get isHomePage(): boolean {
+    return this.router.url === '/home' || this.router.url === '/';
+  }
+
   navItems = [
     { name: 'HOME', link: 'home' },
     { name: 'ABOUT', link: 'about' },
@@ -37,7 +44,11 @@ export class NavbarComponent {
 
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 50;
+    if (this.isHomePage) {
+      this.isScrolled = window.scrollY > 50;
+    } else {
+      this.isScrolled = true;
+    }
   }
 
   toggleNavbar() {

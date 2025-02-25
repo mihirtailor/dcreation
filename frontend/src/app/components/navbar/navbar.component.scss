@@ -1,5 +1,5 @@
 .navbar {
-  background: transparent;
+  background: var(--background-color);
   padding: var(--spacing-sm) 0;
   position: fixed;
   width: 100%;
@@ -8,20 +8,24 @@
   transform: translateY(0);
   transition: transform 0.3s ease, background 0.3s ease;
 
-  &.scrolled {
-    background: var(--background-color);
-    transform: translateY(0);
+  &.home-page {
+    background: transparent;
+
+    &.scrolled {
+      background: var(--background-color);
+      transform: translateY(0);
+    }
   }
 }
 
 .navbar-brand {
   font-size: var(--heading-4);
   font-weight: 700;
-  color: var(--text-light-color);
+  color: var(--text-dark-color);
   letter-spacing: 0.5px;
 
-  .scrolled & {
-    color: var(--text-dark-color);
+  .home-page:not(.scrolled) & {
+    color: var(--text-light-color);
   }
 }
 
@@ -30,19 +34,13 @@
   font-size: calc(var(--body-text) * 1.1);
   font-weight: 500;
   font-family: var(--font-family-primary);
-  color: var(--text-light-color);
+  color: var(--text-dark-color);
   padding: var(--spacing-sm) var(--spacing-md);
   margin: 0 var(--spacing-md);
   transition: 0.3s ease;
 
-  .scrolled & {
-    color: var(--text-dark-color);
-
-    &:hover,
-    &.active {
-      color: var(--primary-color);
-    }
-
+  .home-page:not(.scrolled) & {
+    color: var(--text-light-color);
   }
 
   &:hover,

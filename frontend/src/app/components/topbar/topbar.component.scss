@@ -1,30 +1,25 @@
 .top-bar {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
+  background: var(--light-gray);
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1031;
   transition: all 0.3s ease;
 
+  &.home-page {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+
+    &.scrolled {
+      background: var(--light-gray);
+    }
+  }
+
   .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-sm) 0;
-  }
-
-  &.scrolled {
-    background: var(--light-gray);
-
-    .info-item,
-    .social-icon {
-      color: var(--text-dark-color);
-
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
   }
 }
 
@@ -37,10 +32,14 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  color: var(--text-light-color);
+  color: var(--text-dark-color);
   font-size: var(--body-text-small);
   font-family: var(--font-family-primary);
   transition: all 0.3s ease;
+
+  .home-page:not(.scrolled) & {
+    color: var(--text-light-color);
+  }
 
   i {
     font-size: var(--body-text-small);
@@ -66,7 +65,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-light-color);
+  color: var(--text-dark-color);
+
+  .home-page:not(.scrolled) & {
+    color: var(--text-light-color);
+  }
 
   &:hover {
     color: var(--primary-color);

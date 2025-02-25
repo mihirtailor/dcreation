@@ -1,28 +1,28 @@
 .contact-cta {
-    padding: 50px 0;
-    background: linear-gradient(135deg, #27d088 0%, #1A6B47 100%);
-    margin-top: 60px;
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark-color) 100%);
+    margin-top: calc(var(--spacing-xl) * 1.5);
 
     h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: var(--heading-2);
+        margin-bottom: var(--spacing-sm);
         font-weight: 600;
-        color: #ffffff; // Adding light text for better contrast
+        color: var(--text-light-color);
     }
 
     .lead {
-        font-size: 1.25rem;
-        margin-bottom: 2rem;
-        color: #e0e0e0; // Lightened text color for readability
+        font-size: var(--heading-4);
+        margin-bottom: var(--spacing-lg);
+        color: var(--light-gray);
     }
 
     .btn-primary {
-        padding: 12px 30px;
-        font-size: 1.1rem;
+        padding: var(--spacing-sm) var(--spacing-xl);
+        font-size: var(--body-text);
         transition: all 0.3s ease;
-        background-color: #dc3545;
+        background-color: var(--secondary-dark-color);
         border: none;
-        color: #ffffff;
+        color: var(--text-light-color);
 
         &:hover {
             transform: translateY(-2px);

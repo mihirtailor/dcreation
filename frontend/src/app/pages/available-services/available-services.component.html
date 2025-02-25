@@ -62,23 +62,4 @@
       </div>
     </div>
   </section>
-
-  <section class="testimonials-section">
-    <div class="container">
-      <h2>What Our Clients Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card" *ngFor="let testimonial of testimonials">
-          <div class="testimonial-content">
-            <img [src]="testimonial.imageUrl" [alt]="testimonial.name" class="testimonial-image" />
-            <p>{{ testimonial.comment }}</p>
-            <div class="rating">
-              <i class="fas fa-star" *ngFor="let star of [].constructor(testimonial.rating)"></i>
-            </div>
-            <h4>{{ testimonial.name }}</h4>
-            <p class="company">{{ testimonial.company }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </div>
