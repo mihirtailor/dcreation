@@ -87,6 +87,7 @@ export class PortfolioAdminComponent implements OnInit {
     this.portfolioService.getCategories().subscribe({
       next: (categories) => {
         this.portfolioCategories = categories;
+        console.log('Available categories:', this.portfolioCategories.map(c => c.id));
       },
       error: (error) => {
         this.snackBar.open('Error loading categories', 'Close', {
@@ -174,6 +175,7 @@ export class PortfolioAdminComponent implements OnInit {
     const category = this.portfolioCategories.find(c => c.id.toString() === categoryId?.toString());
     return category ? category.name : '';
   }
+
 
   getCategoryIcon(categoryId: any): string {
     const category = this.portfolioCategories.find(c => c.id.toString() === categoryId?.toString());
@@ -354,7 +356,7 @@ export class PortfolioAdminComponent implements OnInit {
 
       // Basic portfolio data
       formData.append('title', portfolio.title);
-      formData.append('category', portfolio.category);
+      formData.append('category', portfolio.categoryId || portfolio.category);
       formData.append('description', portfolio.description);
       formData.append('client', portfolio.client);
       formData.append('completionDate', portfolio.completionDate);

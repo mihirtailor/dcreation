@@ -1,122 +1,78 @@
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PortfolioComponent } from '../../../portfolio/portfolio.component';
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-  query,
-  stagger,
-} from '@angular/animations';
+import { RouterModule } from '@angular/router';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { PortfolioService } from '../../../../services/portfolio.service';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 interface PortfolioItem {
   id: number;
   title: string;
   category: string;
   imageUrl: string;
+  gallery: string[];
   description: string;
-  animation: string;
+  client: string;
+  completionDate: string;
+  tags: string[];
 }
 
 @Component({
   selector: 'app-portfolio-preview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, NgbModule],
   templateUrl: './portfolio-preview.component.html',
-  styleUrl: './portfolio-preview.component.scss',
-  animations: [
-    trigger('staggerAnimation', [
-      transition('* => *', [
-        query(
-          ':enter',
-          [
-            style({ opacity: 0, transform: 'translateY(100px)' }),
-            stagger(100, [
-              animate(
-                '0.5s cubic-bezier(0.35, 0, 0.25, 1)',
-                style({ opacity: 1, transform: 'translateY(0)' })
-              ),
-            ]),
-          ],
-          { optional: true }
-        ),
-      ]),
-    ]),
-    trigger('fadeInUp', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(30px)' }),
-        animate(
-          '0.8s ease-out',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-    ]),
-  ],
+  styleUrl: './portfolio-preview.component.scss'
 })
 export class PortfolioPreviewComponent implements OnInit {
-  constructor(private modalService: NgbModal) {}
+  portfolioItems: PortfolioItem[] = [];
+  selectedItem!: PortfolioItem;
+  portfolioCategories: any[] = [];
+  private portfolioService = inject(PortfolioService);
+  private modalService = inject(NgbModal);
 
-  portfolioItems: PortfolioItem[] = [
-    {
-      id: 1,
-      title: 'Brand Identity Design',
-      category: 'Branding',
-      imageUrl: 'assets/images/hero/slide1.jpg',
-      description: 'Complete brand identity design for modern tech startup',
-      animation: 'fade-right',
-    },
-    {
-      id: 2,
-      title: 'Print Campaign',
-      category: 'Print Design',
-      imageUrl: 'assets/images/hero/slide1.jpg',
-      description: 'Multi-format print campaign for retail brand',
-      animation: 'fade-up',
-    },
-    {
-      id: 3,
-      title: 'Magazine Layout',
-      category: 'Editorial',
-      imageUrl: 'assets/images/hero/slide1.jpg',
-      description: 'Editorial design for lifestyle magazine',
-      animation: 'fade-left',
-    },
-    {
-      id: 4,
-      title: 'Packaging Design',
-      category: 'Product',
-      imageUrl: 'assets/images/hero/slide1.jpg',
-      description: 'Creative packaging solution for premium product line',
-      animation: 'zoom-in',
-    },
-    {
-      id: 5,
-      title: 'Exhibition Graphics',
-      category: 'Large Format',
-      imageUrl: 'assets/images/hero/slide1.jpg',
-      description: 'Complete exhibition design and graphics',
-      animation: 'flip-left',
-    },
-    {
-      id: 6,
-      title: 'Annual Report',
-      category: 'Corporate',
-      imageUrl: 'assets/images/hero/slide1.jpg',
-      description: 'Corporate annual report design',
-      animation: 'flip-right',
-    },
-  ];
+  ngOnInit() {
+    this.loadFeaturedPortfolioItems();
+    this.loadCategories();
+  }
 
-  ngOnInit(): void {}
-
-  viewProject(project: PortfolioItem): void {
-    const modalRef = this.modalService.open(PortfolioComponent, {
-      size: 'lg',
-      centered: true,
-      windowClass: 'project-modal',
+  loadFeaturedPortfolioItems() {
+    this.portfolioService.getAllPortfolios().subscribe({
+      next: (items) => {
+        this.portfolioItems = items.slice(0, 3);
+      },
+      error: (error) => {
+        console.error('Error loading featured portfolio items:', error);
+      }
     });
-    modalRef.componentInstance.project = project;
+  }
+
+  viewProject(project: PortfolioItem, content: any) {
+    this.selectedItem = project;
+    this.modalService.open(content, {
+      size: 'xl',
+      centered: true,
+      windowClass: 'portfolio-modal',
+    });
+  }
+
+  closeModal() {
+    this.modalService.dismissAll();
+  }
+
+  getCategoryName(categoryId: string): string {
+    const category = this.portfolioCategories.find(c => c.id.toString() === categoryId?.toString());
+    return category ? category.name : categoryId;
+  }
+
+  loadCategories() {
+    this.portfolioService.getCategories().subscribe({
+      next: (categories) => {
+        this.portfolioCategories = categories;
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+      }
+    });
   }
 }

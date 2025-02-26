@@ -1,28 +1,29 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, PLATFORM_ID, Inject, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 import { AvailableService } from '../../../../services/availabe-service.service';
+
 
 @Component({
   selector: 'app-services-preview',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './services-preview.component.html',
   styleUrl: './services-preview.component.scss',
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
-      ]),
+        animate('600ms ease-out')
+      ])
     ]),
     trigger('cardAnimation', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(40px)' }),
-        animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
-      ]),
-    ]),
+        animate('800ms ease-out')
+      ])
+    ])
   ]
 })
 export class ServicesPreviewComponent implements AfterViewInit, OnInit {
@@ -39,8 +40,7 @@ export class ServicesPreviewComponent implements AfterViewInit, OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private availableService: AvailableService,
-    private router: Router,
-    private viewportScroller: ViewportScroller
+    private router: Router
   ) { }
 
   ngOnInit() {

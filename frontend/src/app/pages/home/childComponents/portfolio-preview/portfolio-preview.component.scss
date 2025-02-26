@@ -1,5 +1,7 @@
 .portfolio-preview {
   padding: calc(var(--spacing-xl) * 2) 0;
+  position: relative;
+  z-index: 1;
 }
 
 .heading-2 {
@@ -9,6 +11,8 @@
   font-weight: 600;
   letter-spacing: 2px;
   display: inline-block;
+  position: relative;
+  z-index: 2;
 }
 
 .portfolio-card {
@@ -17,6 +21,8 @@
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  z-index: 1;
 
   &:hover {
     transform: translateY(-10px) scale(1.02);
@@ -37,15 +43,22 @@
 
     img {
       height: 350px;
+      width: 100%;
       object-fit: cover;
       transition: transform 0.8s ease;
     }
   }
 
   .card-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
     opacity: 0;
     transition: all 0.4s ease;
+    z-index: 2;
 
     .overlay-content {
       transform: translateY(var(--spacing-md));
@@ -87,6 +100,7 @@
   border-radius: var(--border-radius-lg);
   transition: all 0.3s ease;
   overflow: hidden;
+  z-index: 2;
 
   &:hover {
     transform: translateY(-3px);
@@ -136,4 +150,34 @@
       }
     }
   }
+}
+
+::ng-deep .portfolio-modal {
+  .carousel-image-container {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    background-color: var(--text-dark-color);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 50%;
+    background-size: 50%;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 5%;
+    opacity: 0.9;
+  }
+
 }
