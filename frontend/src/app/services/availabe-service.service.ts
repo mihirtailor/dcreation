@@ -50,20 +50,21 @@ export class AvailableService {
     return this.http.delete<void>(`${this.apiUrl}/services/${id}`);
   }
 
-  // Category methods
+  // Category methods for services
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}/categories`);
+    return this.http.get<Category[]>(`${this.apiUrl}/service-categories`);
   }
 
   createCategory(data: Partial<Category>): Observable<Category> {
-    return this.http.post<Category>(`${this.apiUrl}/categories`, data);
+    return this.http.post<Category>(`${this.apiUrl}/service-categories`, data);
   }
 
   updateCategory(id: number, data: Partial<Category>): Observable<Category> {
-    return this.http.put<Category>(`${this.apiUrl}/categories/${id}`, data);
+    return this.http.put<Category>(`${this.apiUrl}/service-categories/${id}`, data);
   }
 
   deleteCategory(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/categories/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/service-categories/${id}`);
   }
+
 }

@@ -31,6 +31,7 @@ const Contact = require("./models/contact")(sequelize);
 const Service = require("./models/service")(sequelize);
 const Category = require("./models/category")(sequelize);
 const Portfolio = require("./models/portfolio")(sequelize);
+const PortfolioCategory = require("./models/portfolioCategory")(sequelize);
 
 // Test Sequelize connection
 sequelize
@@ -45,4 +46,5 @@ module.exports = {
     Service,
     Category,
     Portfolio,
+    PortfolioCategory
 };

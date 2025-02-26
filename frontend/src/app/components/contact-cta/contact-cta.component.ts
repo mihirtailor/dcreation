@@ -33,5 +33,4 @@ export class ContactCtaComponent {
       window.scrollTo(0, 0);
     });
   }
-
 }

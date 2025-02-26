@@ -50,18 +50,18 @@ export class PortfolioService {
 
   // New Category Methods
   getCategories(): Observable<PortfolioCategory[]> {
-    return this.http.get<PortfolioCategory[]>(`${this.apiUrl}/categories`);
+    return this.http.get<PortfolioCategory[]>(`${this.apiUrl}/portfolio-categories`);
   }
 
   createCategory(category: Partial<PortfolioCategory>): Observable<PortfolioCategory> {
-    return this.http.post<PortfolioCategory>(`${this.apiUrl}/categories`, category);
+    return this.http.post<PortfolioCategory>(`${this.apiUrl}/portfolio-categories`, category);
   }
 
   updateCategory(id: number, category: Partial<PortfolioCategory>): Observable<PortfolioCategory> {
-    return this.http.put<PortfolioCategory>(`${this.apiUrl}/categories/${id}`, category);
+    return this.http.put<PortfolioCategory>(`${this.apiUrl}/portfolio-categories/${id}`, category);
   }
 
   deleteCategory(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/categories/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/portfolio-categories/${id}`);
   }
 }

@@ -33,15 +33,15 @@ export class FooterComponent {
   email = '';
 
   contactInfo = {
-    address: '123 Business Avenue, Suite 100, City, State 12345',
-    phone: '+1 (555) 123-4567',
+    address: "D'Creation, Jash Point Complex, Sagrampura, Surat, Gujarat, India 395001",
+    phone: '+91 9925830109',
     email: 'info@dcreation.com',
     hours: 'Mon - Fri: 9:00 AM - 6:00 PM',
   };
 
   socialLinks = [
-    { icon: 'fab fa-instagram', url: '#', label: 'Instagram' },
-    { icon: 'fab fa-facebook', url: '#', label: 'Facebook' },
+    { icon: 'fab fa-instagram', url: 'https://www.instagram.com/parixittopiwala/', label: 'Instagram' },
+    { icon: 'fab fa-facebook', url: 'https://www.facebook.com/parixit.topiwala.50/', label: 'Facebook' },
   ];
 
   services = [

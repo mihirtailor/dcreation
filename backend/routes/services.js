@@ -17,9 +17,9 @@ router.put("/services/:id", uploadMiddleware, serviceController.updateService);
 router.delete("/services/:id", serviceController.deleteService);
 
 // Category routes
-router.get("/categories", categoryController.getAllCategories);
-router.post("/categories", categoryController.createCategory);
-router.put("/categories/:id", categoryController.updateCategory);
-router.delete("/categories/:id", categoryController.deleteCategory);
+router.get("/service-categories", categoryController.getAllCategories);
+router.post("/service-categories", categoryController.createCategory);
+router.put("/service-categories/:id", categoryController.updateCategory);
+router.delete("/service-categories/:id", categoryController.deleteCategory);
 
 module.exports = router;

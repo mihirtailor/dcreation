@@ -16,10 +16,10 @@ const uploadMiddleware = fileUpload({
 });
 
 // Portfolio Category routes
-router.get("/categories", portfolioCategoryController.getAllCategories);
-router.post("/categories", portfolioCategoryController.createCategory);
-router.put("/categories/:id", portfolioCategoryController.updateCategory);
-router.delete("/categories/:id", portfolioCategoryController.deleteCategory);
+router.get("/portfolio-categories", portfolioCategoryController.getAllCategories);
+router.post("/portfolio-categories", portfolioCategoryController.createCategory);
+router.put("/portfolio-categories/:id", portfolioCategoryController.updateCategory);
+router.delete("/portfolio-categories/:id", portfolioCategoryController.deleteCategory);
 
 // Portfolio routes
 router.get("/portfolios", portfolioController.getAllPortfolios);

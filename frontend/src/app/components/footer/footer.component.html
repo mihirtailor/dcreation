@@ -4,15 +4,12 @@
       <!-- Logo & Company Info -->
       <div class="col-lg-4" [@fadeIn]>
         <div class="footer-brand">
-          <img
-            src="assets/images/hero/slide1.jpg"
-            alt="DCreation Logo"
-            class="footer-logo"
-          />
+          <img src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740332265/logo_1_u9bofn.png"
+            alt="DCreation Logo" class="footer-logo" />
           <p class="mt-3">
-            DCreation is a premier digital agency specializing in innovative
-            design solutions. We transform ideas into compelling digital
-            experiences that drive results and create lasting impressions.
+            DCreation is a full-spectrum creative studio mastering the art of visual storytelling through print,
+            digital, and advertising media. We craft bold brand identities, stunning print collateral, and eye-catching
+            advertising campaigns that command attention and deliver measurable impact.
           </p>
         </div>
       </div>
@@ -52,11 +49,7 @@
           </li>
         </ul>
         <div class="social-links mt-4">
-          <a
-            *ngFor="let social of socialLinks"
-            [href]="social.url"
-            [attr.aria-label]="social.label"
-          >
+          <a *ngFor="let social of socialLinks" [href]="social.url" [attr.aria-label]="social.label">
             <i [class]="social.icon"></i>
           </a>
         </div>
