@@ -14,6 +14,7 @@ import {
   NgbModule,
   NgbCarouselModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { ContactCtaComponent } from "../../components/contact-cta/contact-cta.component";
 
 interface PortfolioItem {
   id: number;
@@ -30,7 +31,7 @@ interface PortfolioItem {
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule, NgbModule, NgbCarouselModule],
+  imports: [CommonModule, NgbModule, NgbCarouselModule, ContactCtaComponent],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.scss',
   animations: [
@@ -78,16 +79,37 @@ interface PortfolioItem {
 })
 export class PortfolioComponent implements OnInit {
   selectedCategory: string = 'all';
-  categories: string[] = ['all', 'branding', 'print', 'digital', 'packaging'];
+  categories: string[] = ['all'];
   portfolioItems: PortfolioItem[] = [];
   filteredItems: PortfolioItem[] = [];
   selectedItem!: PortfolioItem;
   private modalService = inject(NgbModal);
+  portfolioCategories: any[] = [];
 
-  constructor(private portfolioService: PortfolioService) {}
+  constructor(private portfolioService: PortfolioService) { }
 
   ngOnInit() {
     this.loadPortfolioItems();
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.portfolioService.getCategories().subscribe({
+      next: (categories) => {
+        this.portfolioCategories = categories;
+        // Add category names to the categories array
+        this.categories = ['all', ...categories.map(cat => cat.id.toString())];
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+      }
+    });
+  }
+
+
+  getCategoryName(categoryId: string): string {
+    const category = this.portfolioCategories.find(c => c.id.toString() === categoryId?.toString());
+    return category ? category.name : categoryId;
   }
 
   loadPortfolioItems() {

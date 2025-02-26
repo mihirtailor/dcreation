@@ -1,4 +1,92 @@
 <div class="container-fluid py-4">
+  <!-- PORTFOLIO CATEGORY MANAGEMENT -->
+  <section class="bg-white rounded shadow-sm p-4 mb-4">
+    <h2 class="mb-4">Portfolio Categories Management</h2>
+
+    <!-- Add Category Form -->
+    <form [formGroup]="categoryForm" (ngSubmit)="createCategory()" class="mb-4">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="name" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Icon</label>
+        <select class="form-select" formControlName="icon" required>
+          <option value="">Select an icon</option>
+          <option value="fa-star">✨ Branding & Identity</option>
+          <option value="fa-bullhorn">📢 Marketing & Promotional</option>
+          <option value="fa-billboard">🏢 Large Format & Outdoor</option>
+          <option value="fa-box">📦 Packaging & Labels</option>
+          <option value="fa-building">🏛️ Event & Corporate</option>
+          <option value="fa-hashtag">💻 Digital & Social Media</option>
+          <option value="fa-tshirt">👕 Custom Merchandise</option>
+        </select>
+        <div class="icon-preview mt-2" *ngIf="categoryForm.get('icon')?.value">
+          <i class="fas {{ categoryForm.get('icon')?.value }}"></i>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" rows="4" formControlName="description" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="!categoryForm.valid">
+        Add Category
+      </button>
+    </form>
+
+    <!-- Categories List -->
+    <div class="row g-4">
+      <div class="col-md-4" *ngFor="let category of portfolioCategories">
+        <!-- Category View Mode -->
+        <div class="card h-100" *ngIf="!category.isEditing">
+          <div class="card-body d-flex flex-column">
+            <h3 class="card-title">{{ category.name }}</h3>
+            <p class="text-primary mb-3">
+              <i class="fas {{ category.icon }} fs-4"></i>
+            </p>
+            <p class="card-text flex-grow-1">{{ category.description }}</p>
+            <div class="d-flex gap-2 mt-auto">
+              <button class="btn btn-outline-primary flex-grow-1" (click)="category.isEditing = true">
+                Edit
+              </button>
+              <button class="btn btn-outline-danger flex-grow-1" (click)="deleteCategory(category.id)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Edit Mode -->
+        <div class="card h-100" *ngIf="category.isEditing">
+          <div class="card-body">
+            <input type="text" class="form-control mb-3" [(ngModel)]="category.name" />
+            <select class="form-select mb-3" [(ngModel)]="category.icon">
+              <option value="fa-star">✨ Branding & Identity</option>
+              <option value="fa-bullhorn">📢 Marketing & Promotional</option>
+              <option value="fa-billboard">🏢 Large Format & Outdoor</option>
+              <option value="fa-box">📦 Packaging & Labels</option>
+              <option value="fa-building">🏛️ Event & Corporate</option>
+              <option value="fa-hashtag">💻 Digital & Social Media</option>
+              <option value="fa-tshirt">👕 Custom Merchandise</option>
+            </select>
+            <textarea class="form-control mb-3" [(ngModel)]="category.description"></textarea>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary flex-grow-1" (click)="updateCategory(category)">
+                Save
+              </button>
+              <button class="btn btn-secondary flex-grow-1" (click)="category.isEditing = false">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="upload-section bg-white rounded shadow-sm p-4 mb-4">
     <h2 class="mb-4">Portfolio Management</h2>
 
@@ -25,9 +113,7 @@
                 style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;" />
               <button class="btn btn-danger btn-sm position-absolute top-0 end-0"
                 style="transform: translate(50%, -50%); border-radius: 50%; padding: 0.2rem 0.4rem;"
-                (click)="removeTempImage(i)">
-                ×
-              </button>
+                (click)="removeTempImage(i)">×</button>
             </div>
           </div>
         </div>
@@ -40,12 +126,11 @@
 
       <div class="form-group">
         <label>Category</label>
-        <select formControlName="category" required>
+        <select formControlName="categoryId" class="form-select" required>
           <option value="">Select a category</option>
-          <option value="branding">Branding</option>
-          <option value="print">Print</option>
-          <option value="digital">Digital</option>
-          <option value="packaging">Packaging</option>
+          <option *ngFor="let category of portfolioCategories" [value]="category.id">
+            {{ category.name }}
+          </option>
         </select>
       </div>
 
@@ -81,7 +166,10 @@
         <div class="card h-100" *ngIf="!item.isEditing" @slideInOut>
           <img [src]="item.imageUrl" class="card-img-top" [alt]="item.title" />
           <div class="card-body d-flex flex-column">
-            <span class="badge bg-primary mb-2">{{ item.category }}</span>
+            <span class="badge bg-primary mb-2">
+              <i class="fas {{ getCategoryIcon(item.category) }}"></i>
+              {{ getCategoryName(item.category) }}
+            </span>
             <h3 class="card-title h5">{{ item.title }}</h3>
             <p class="card-text">{{ item.description }}</p>
             <p class="mb-1"><strong>Client:</strong> {{ item.client }}</p>
@@ -110,13 +198,21 @@
         <!-- Portfolio Edit Mode -->
         <div class="card h-100" *ngIf="item.isEditing" @slideInOut>
           <div class="card-body">
+            <div class="form-group mb-3">
+              <label>Main Image</label>
+              <div class="d-flex gap-2 mb-2">
+                <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*" />
+              </div>
+              <img [src]="tempMainImagePreview || item.imageUrl" class="img-thumbnail mt-2"
+                style="height: 100px; object-fit: cover;" />
+            </div>
+
             <div class="form-group">
               <label>Category</label>
-              <select [(ngModel)]="item.category">
-                <option value="branding">Branding</option>
-                <option value="print">Print</option>
-                <option value="digital">Digital</option>
-                <option value="packaging">Packaging</option>
+              <select [(ngModel)]="item.categoryId" class="form-select">
+                <option *ngFor="let category of portfolioCategories" [value]="category.id">
+                  {{ category.name }}
+                </option>
               </select>
             </div>
 
@@ -162,9 +258,7 @@
                       style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;" />
                     <button class="btn btn-danger btn-sm position-absolute top-0 end-0"
                       style="transform: translate(50%, -50%); border-radius: 50%; padding: 0.2rem 0.4rem;"
-                      (click)="removeGalleryImage(item, i)">
-                      ×
-                    </button>
+                      (click)="removeGalleryImage(item, i)">×</button>
                   </div>
 
                   <div class="position-relative" *ngFor="let image of tempGalleryImages; let i = index">
@@ -172,9 +266,7 @@
                       style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;" />
                     <button class="btn btn-danger btn-sm position-absolute top-0 end-0"
                       style="transform: translate(50%, -50%); border-radius: 50%; padding: 0.2rem 0.4rem;"
-                      (click)="removeTempImage(i)">
-                      ×
-                    </button>
+                      (click)="removeTempImage(i)">×</button>
                   </div>
                 </div>
               </div>

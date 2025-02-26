@@ -1,10 +1,13 @@
-// Hero Section
 .portfolio-hero {
   .hero-parallax {
     position: relative;
-    background-color: #000;
+    height: 600px;
+    background-color: var(--text-dark-color);
 
     img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       opacity: 0.7;
       transition: transform 0.5s ease;
     }
@@ -17,29 +20,52 @@
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    text-align: center;
+    color: var(--text-light-color);
   }
 }
 
-// Filter Section
+.filter-section {
+  padding: var(--spacing-xl) 0;
+}
+
+.filter-wrapper {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
 .btn-filter {
   background: transparent;
-  border: 2px solid #5e72e4;
-  color: #5e72e4;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
   font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
   transition: all 0.3s ease;
 
   &:hover,
   &.active {
-    background: #5e72e4;
-    color: white;
+    background: var(--primary-color);
+    color: var(--text-light-color);
     transform: translateY(-2px);
   }
 }
 
-// Masonry Grid
 .masonry-grid {
   columns: 3;
-  column-gap: 2rem;
+  column-gap: var(--spacing-xl);
 
   @media (max-width: 992px) {
     columns: 2;
@@ -51,15 +77,14 @@
 
   .masonry-item {
     break-inside: avoid;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-xl);
   }
 }
 
-// Portfolio Cards
 .portfolio-card {
   position: relative;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: var(--border-radius-md);
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -93,7 +118,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(94, 114, 228, 0.9);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,34 +127,47 @@
     transition: opacity 0.3s ease;
 
     .content {
-      text-align: center;
-      color: white;
-      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      padding: var(--spacing-md);
+      color: #ffffff;
 
       .category-badge {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
+        align-self: flex-start;
+        background: var(--primary-color);
+        color: #ffffff;
+        padding: 6px 12px;
+        border-radius: var(--border-radius-lg);
         font-size: 0.875rem;
-        margin-bottom: 1rem;
-        display: inline-block;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
-      .title {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+      .heading-3 {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        margin: 0;
+        padding: 0 var(--spacing-md);
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       .view-project-btn {
-        background: white;
-        color: #5e72e4;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
+        align-self: center;
+        background: var(--primary-color);
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border-radius: var(--border-radius-lg);
         font-weight: 500;
-        transition: transform 0.2s ease;
+        transition: all 0.2s ease;
 
         &:hover {
+          background: #ffffff;
+          color: var(--primary-color);
           transform: scale(1.05);
         }
       }
@@ -136,148 +175,68 @@
   }
 }
 
-// Enhanced Modal Styling
-::ng-deep .modal-dialog {
-  max-width: 90vw;
-  margin: 1.75rem auto;
+.project-details {
+  padding: var(--spacing-xl);
+
+  .project-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .category-tag {
+    color: var(--primary-color);
+    font-weight: 500;
+    display: block;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .meta-item {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+
+    .tag {
+      background: var(--light-gray);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--border-radius-lg);
+      font-size: var(--body-text-small);
+      color: var(--primary-color);
+    }
+  }
 }
 
-::ng-deep .portfolio-modal {
-  .modal-content {
-    border: none;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #fff;
+.carousel-image-container {
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  background-color: var(--text-dark-color);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
+}
 
-  .modal-header {
-    border: none;
-    padding: 1rem;
-    position: absolute;
-    right: 0;
-    z-index: 10;
-  }
+::ng-deep .carousel-control-prev-icon,
+::ng-deep .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 25px;
+  border-radius: 50%;
+  background-size: 50%;
+}
 
-  .btn-close {
-    background-color: white;
-    padding: 1rem;
-    margin: 0;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    opacity: 1;
-
-    &:hover {
-      transform: rotate(90deg);
-    }
-  }
-
-  .modal-body {
-    padding: 0;
-  }
-
-  .project-showcase {
-    .carousel-image-container {
-      width: 100%;
-      height: 60vh;
-      overflow: hidden;
-      background-color: #000;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    // Add NgbCarousel custom styles
-    ::ng-deep {
-      .carousel {
-        position: relative;
-
-        .carousel-control-prev,
-        .carousel-control-next {
-          width: 50px;
-          height: 50px;
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 50%;
-          top: 50%;
-          transform: translateY(-50%);
-          margin: 0 20px;
-          opacity: 0.8;
-
-          &:hover {
-            opacity: 1;
-          }
-
-          .carousel-control-prev-icon,
-          .carousel-control-next-icon {
-            filter: invert(1) grayscale(100);
-          }
-        }
-
-        .carousel-indicators {
-          bottom: 20px;
-          margin-bottom: 0;
-
-          button {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.7);
-            margin: 0 5px;
-            border: none;
-
-            &.active {
-              background-color: #fff;
-              transform: scale(1.2);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .project-details {
-    .category-tag {
-      color: #5e72e4;
-      font-weight: 500;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    .project-title {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-description {
-      color: #666;
-      line-height: 1.6;
-    }
-
-    .meta-item {
-      margin-bottom: 1.5rem;
-
-      h6 {
-        color: #8392ab;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-      }
-    }
-
-    .tags-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-
-      .tag {
-        background: #f6f9fc;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.875rem;
-        color: #5e72e4;
-      }
-    }
-  }
+::ng-deep .carousel-control-prev,
+::ng-deep .carousel-control-next {
+  width: 5%;
+  opacity: 0.9;
 }

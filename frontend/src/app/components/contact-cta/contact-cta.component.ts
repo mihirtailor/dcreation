@@ -28,7 +28,10 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 export class ContactCtaComponent {
   constructor(private router: Router) { }
 
-  navigateToContact(): void {
-    this.router.navigate(['/contact']);
+  navigateToContact() {
+    this.router.navigate(['/contact']).then(() => {
+      window.scrollTo(0, 0);
+    });
   }
+
 }

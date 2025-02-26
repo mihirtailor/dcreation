@@ -310,7 +310,6 @@ section {
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
-    margin-bottom: calc(var(--spacing-xl) * 1.5);
 
     &:after {
       content: '';
@@ -348,7 +347,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
-    margin-bottom: calc(var(--spacing-xl) * 1.5);
+    margin-bottom: calc(var(--spacing-xl));
 
     &:after {
       content: '';

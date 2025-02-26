@@ -44,28 +44,38 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class PortfolioAdminComponent implements OnInit {
   portfolioItems: any[] = [];
+  portfolioCategories: any[] = [];
   portfolioForm!: FormGroup;
+  categoryForm!: FormGroup;
   selectedFile: File | null = null;
   tempGalleryImage: File | null = null;
   tempGalleryImages: { file: File; preview: string }[] = [];
   isLoading = false;
+  tempMainImagePreview: string | null = null;
 
   constructor(
     private portfolioService: PortfolioService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar
   ) {
-    this.initializeForm();
+    this.initializeForms();
   }
 
   ngOnInit() {
     this.loadPortfolioItems();
+    this.loadCategories();
   }
 
-  private initializeForm() {
+  private initializeForms() {
+    this.categoryForm = this.fb.group({
+      name: ['', [Validators.required]],
+      icon: ['', [Validators.required]],
+      description: ['', [Validators.required]]
+    });
+
     this.portfolioForm = this.fb.group({
       title: ['', [Validators.required]],
-      category: ['', [Validators.required]],
+      categoryId: ['', [Validators.required]],
       description: ['', [Validators.required]],
       client: ['', [Validators.required]],
       completionDate: ['', [Validators.required]],
@@ -73,9 +83,108 @@ export class PortfolioAdminComponent implements OnInit {
     });
   }
 
+  loadCategories() {
+    this.portfolioService.getCategories().subscribe({
+      next: (categories) => {
+        this.portfolioCategories = categories;
+      },
+      error: (error) => {
+        this.snackBar.open('Error loading categories', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
+  }
+
+  createCategory() {
+    if (this.categoryForm.valid) {
+      this.portfolioService.createCategory(this.categoryForm.value).subscribe({
+        next: () => {
+          this.loadCategories();
+          this.categoryForm.reset();
+          this.snackBar.open('Category created successfully!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar'],
+          });
+        },
+        error: (error) => {
+          this.snackBar.open('Error creating category', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar'],
+          });
+        },
+      });
+    }
+  }
+
+  updateCategory(category: any) {
+    this.portfolioService.updateCategory(category.id, category).subscribe({
+      next: () => {
+        this.loadCategories();
+        category.isEditing = false;
+        this.snackBar.open('Category updated successfully', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
+      },
+      error: (error) => {
+        this.snackBar.open('Error updating category', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+      },
+    });
+  }
+
+  deleteCategory(id: number) {
+    if (confirm('Are you sure you want to delete this category?')) {
+      this.portfolioService.deleteCategory(id).subscribe({
+        next: () => {
+          this.loadCategories();
+          this.snackBar.open('Category deleted successfully', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
+        },
+        error: (error) => {
+          this.snackBar.open('Error deleting category', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar'],
+          });
+        },
+      });
+    }
+  }
+
+  getCategoryName(categoryId: any): string {
+    const category = this.portfolioCategories.find(c => c.id.toString() === categoryId?.toString());
+    return category ? category.name : '';
+  }
+
+  getCategoryIcon(categoryId: any): string {
+    const category = this.portfolioCategories.find(c => c.id.toString() === categoryId?.toString());
+    return category ? category.icon : '';
+  }
+
+
   loadPortfolioItems() {
     this.portfolioService.getAllPortfolios().subscribe({
       next: (items) => {
+        console.log('Portfolio items:', items);
         this.portfolioItems = items;
       },
       error: (error) => {
@@ -93,6 +202,12 @@ export class PortfolioAdminComponent implements OnInit {
     const file = event.target.files[0];
     if (file && this.isValidImageFile(file)) {
       this.selectedFile = file;
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.tempMainImagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
     } else {
       this.snackBar.open(
         'Please select a valid image file (JPG, PNG, or GIF)',
@@ -106,6 +221,7 @@ export class PortfolioAdminComponent implements OnInit {
       event.target.value = '';
     }
   }
+
 
   onSingleGalleryImageSelected(event: any) {
     const file = event.target.files[0];
@@ -175,14 +291,27 @@ export class PortfolioAdminComponent implements OnInit {
       this.isLoading = true;
       const formData = new FormData();
 
+      // Add main image
       formData.append('image', this.selectedFile);
+
+      // Add gallery images
       this.tempGalleryImages.forEach((image) => {
         formData.append('gallery', image.file);
       });
 
-      Object.keys(this.portfolioForm.value).forEach((key) => {
-        formData.append(key, this.portfolioForm.get(key)?.value);
-      });
+      // Get form values
+      const formValues = this.portfolioForm.value;
+
+      // Process tags
+      const tags = formValues.tags.split(',').map((tag: string) => tag.trim());
+
+      // Append form data with proper JSON stringification
+      formData.append('title', formValues.title);
+      formData.append('category', formValues.categoryId); // Changed from categoryId to category
+      formData.append('description', formValues.description);
+      formData.append('client', formValues.client);
+      formData.append('completionDate', formValues.completionDate);
+      formData.append('tags', JSON.stringify(tags));
 
       this.portfolioService.createPortfolio(formData).subscribe({
         next: () => {
@@ -196,6 +325,7 @@ export class PortfolioAdminComponent implements OnInit {
           this.resetForm();
         },
         error: (error) => {
+          console.error('Portfolio creation error:', error);
           this.snackBar.open('Error creating portfolio item', 'Close', {
             duration: 3000,
             horizontalPosition: 'right',
@@ -209,6 +339,7 @@ export class PortfolioAdminComponent implements OnInit {
       });
     }
   }
+
 
   updatePortfolio(portfolio: any) {
     if (portfolio.isEditing) {
