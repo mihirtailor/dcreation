@@ -1,7 +1,8 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, PLATFORM_ID, Inject, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { AvailableService } from '../../../../services/availabe-service.service';
 
 @Component({
   selector: 'app-services-preview',
@@ -24,56 +25,27 @@ import { RouterLink } from '@angular/router';
     ]),
   ]
 })
-export class ServicesPreviewComponent implements AfterViewInit {
+export class ServicesPreviewComponent implements AfterViewInit, OnInit {
   @ViewChild('animatedSection') animatedSection!: ElementRef;
   isVisible = false;
+  serviceCards: {
+    id: number;
+    icon: string;
+    title: string;
+    description: string;
+    link: string;
+  }[] = [];
 
-  serviceCards = [
-    {
-      id: 1,
-      icon: 'fas fa-layer-group',
-      title: 'Professional Printing',
-      description: 'High-quality printing services for all your business needs',
-      link: '/services#printing'
-    },
-    {
-      id: 2,
-      icon: 'fas fa-vector-square',
-      title: 'Sign Solutions',
-      description: 'Custom signage and displays for maximum impact',
-      link: '/services#signs'
-    },
-    {
-      id: 3,
-      icon: 'fas fa-bezier-curve',
-      title: 'Graphic Design',
-      description: 'Creative solutions for your brand identity',
-      link: '/services#design'
-    },
-    {
-      id: 4,
-      icon: 'fas fa-palette',
-      title: 'Custom Branding',
-      description: 'Comprehensive branding solutions for your business',
-      link: '/services#branding'
-    },
-    {
-      id: 5,
-      icon: 'fas fa-cube',
-      title: 'Packaging Design',
-      description: 'Innovative packaging solutions that stand out',
-      link: '/services#packaging'
-    },
-    {
-      id: 6,
-      icon: 'fas fa-laptop-code',
-      title: 'Digital Services',
-      description: 'Modern digital solutions for the digital age',
-      link: '/services#digital'
-    }
-  ];
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private availableService: AvailableService,
+    private router: Router,
+    private viewportScroller: ViewportScroller
+  ) { }
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  ngOnInit() {
+    this.loadServices();
+  }
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -88,6 +60,43 @@ export class ServicesPreviewComponent implements AfterViewInit {
       );
       observer.observe(this.animatedSection.nativeElement);
     }
+  }
+
+  loadServices() {
+    this.availableService.getCategories().subscribe(categories => {
+      this.availableService.getServices().subscribe(services => {
+        const previewServices = categories.slice(0, 4).map(category => {
+          return {
+            id: category.id,
+            icon: category.icon.includes('fas') ? category.icon : `fas ${category.icon}`,
+            title: category.name,
+            description: category.description,
+            link: `category-${category.id}` // Remove the /services prefix
+          };
+        });
+        this.serviceCards = previewServices;
+      });
+    });
+  }
+
+
+  navigateToService(categoryId: number) {
+    const elementId = `category-${categoryId}`;
+    this.router.navigate(['/services']).then(() => {
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    });
   }
 
   getAnimationDelay(index: number): { delay: number } {

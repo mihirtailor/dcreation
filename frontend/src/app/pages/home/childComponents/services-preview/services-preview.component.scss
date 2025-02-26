@@ -11,6 +11,15 @@
   color: var(--primary-color);
 }
 
+// New grid layout
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .service-card {
   min-height: 400px;
   height: 100%;
@@ -128,5 +137,12 @@ h3 {
       transform: rotate(45deg);
       transition: border-color 0.3s ease;
     }
+  }
+}
+
+// Add responsive breakpoint
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
   }
 }
