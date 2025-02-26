@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { PortfolioService } from '../../../../services/portfolio.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -36,6 +35,13 @@ export class PortfolioPreviewComponent implements OnInit {
     this.loadCategories();
   }
 
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
   loadFeaturedPortfolioItems() {
     this.portfolioService.getAllPortfolios().subscribe({
       next: (items) => {
@@ -53,6 +59,15 @@ export class PortfolioPreviewComponent implements OnInit {
       size: 'xl',
       centered: true,
       windowClass: 'portfolio-modal',
+    });
+  }
+
+  showDetails(project: PortfolioItem, content: any) {
+    this.selectedItem = project;
+    this.modalService.open(content, {
+      size: 'lg',
+      centered: true,
+      windowClass: 'portfolio-details-modal',
     });
   }
 
