@@ -39,6 +39,10 @@
 
   .home-page:not(.scrolled) & {
     color: var(--text-light-color);
+
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 
   i {
@@ -69,6 +73,10 @@
 
   .home-page:not(.scrolled) & {
     color: var(--text-light-color);
+
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 
   &:hover {
