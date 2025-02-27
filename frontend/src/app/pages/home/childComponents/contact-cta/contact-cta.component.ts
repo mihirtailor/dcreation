@@ -18,4 +18,7 @@ export class ContactCtaComponent {
     });
   }
 
+  makePhoneCall() {
+    window.location.href = 'tel:+919925830109';
+  }
 }

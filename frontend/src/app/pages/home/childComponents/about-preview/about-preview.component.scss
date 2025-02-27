@@ -65,8 +65,8 @@
       position: absolute;
       left: -30px;
       bottom: 40px;
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark-color) 100%);
-      color: var(--text-light-color);
+      background: #fff;
+      color: var(--primary-color);
       padding: var(--spacing-md);
       border-radius: 50%;
       width: 120px;
@@ -99,7 +99,7 @@
     line-height: 1.2;
     margin-bottom: var(--spacing-md);
     font-weight: 600;
-    background: linear-gradient(45deg, var(--text-dark-color) 30%, var(--dark-gray) 100%);
+    background: var(--text-dark-color);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -107,7 +107,7 @@
   }
 
   .lead-text {
-    font-size: var(--body-text);
+    font-size: calc(var(--body-text)*1.2);
     line-height: 1.6;
     color: var(--dark-gray);
     margin-bottom: var(--spacing-xl);

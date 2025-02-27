@@ -34,9 +34,9 @@ import {
 })
 export class AvailableServicesComponent implements OnInit {
   serviceHero = {
-    title: 'Professional Print & Sign Solutions',
-    subtitle: 'Quality Services for All Your Business Needs',
-    imageUrl: 'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc',
+    title: '',
+    subtitle: '',
+    imageUrl: 'https://res.cloudinary.com/dqfwg0the/image/upload/v1740625229/service_offer_zgzwgd.jpg',
   };
 
   serviceCategories: (Category & { services: Service[] })[] = [];

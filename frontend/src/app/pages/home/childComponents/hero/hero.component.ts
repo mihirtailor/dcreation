@@ -22,6 +22,7 @@ export class HeroComponent implements OnInit, OnDestroy, AfterViewInit {
     this.sliderService.getSlides().subscribe(
       (slides) => {
         this.sliderItems = slides;
+        this.startImageRotation();
       },
       (error) => {
         console.error('Error loading slides:', error);
@@ -29,10 +30,8 @@ export class HeroComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+
   ngAfterViewInit() {
-    if (this.sliderItems.length > 0) {
-      this.startImageRotation();
-    }
   }
 
   ngOnDestroy() {

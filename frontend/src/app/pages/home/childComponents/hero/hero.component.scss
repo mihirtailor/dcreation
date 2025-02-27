@@ -60,7 +60,7 @@
 
   h2 {
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: var(--spacing-md);
     letter-spacing: 1px;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
@@ -71,13 +71,14 @@
 
   p {
     font-size: 25px;
+    font-weight: 500;
     line-height: 1.6;
     margin-bottom: var(--spacing-xl);
     letter-spacing: 0.5px;
     transform: translateY(30px);
     opacity: 0;
     animation: slideUpFade 0.8s forwards 0.3s;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
   }
 }
 

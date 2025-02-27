@@ -1,30 +1,36 @@
 // Hero Section
 .hero-section {
-  height: 50vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("https://res.cloudinary.com/dqfwg0the/image/upload/v1736352016/cld-sample-2.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   position: relative;
+  height: 400px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
 
   .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start; // Changed from center to flex-start
     justify-content: center;
+    padding-top: 100px;
 
     h1 {
       font-size: var(--heading-1);
       font-family: var(--font-family-primary);
       font-weight: 700;
-      color: var(--text-light-color);
+      color: var(--text-dark-color);
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
   }
 }
+
 
 // Contact Form Container
 .contact-form {
