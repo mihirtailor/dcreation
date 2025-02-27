@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import {
   trigger,
   state,
@@ -8,7 +8,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -29,6 +29,18 @@ import { RouterModule } from '@angular/router';
   ],
 })
 export class FooterComponent {
+  constructor(
+    private router: Router,
+    private viewportScroller: ViewportScroller
+  ) {
+    // Subscribe to router events
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Scroll to top after navigation
+        this.viewportScroller.scrollToPosition([0, 0]);
+      }
+    });
+  }
   currentYear = new Date().getFullYear();
   email = '';
 

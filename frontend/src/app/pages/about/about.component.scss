@@ -70,6 +70,8 @@ section {
   padding: var(--spacing-xl) 0;
 
   .owner-image {
+    margin-top: -130px;
+
     img {
       width: 100%;
       height: auto;
@@ -89,6 +91,7 @@ section {
 
     h2 {
       font-size: var(--heading-2);
+      font-weight: 600;
     }
 
     .expertise-tags {

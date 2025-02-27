@@ -7,11 +7,12 @@ import {
   Category,
   Service,
 } from '../../services/availabe-service.service';
+import { ContactCtaComponent } from "../../components/contact-cta/contact-cta.component";
 
 @Component({
   selector: 'app-available-services',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ContactCtaComponent],
   templateUrl: './available-services.component.html',
   styleUrls: ['./available-services.component.scss'],
   animations: [
