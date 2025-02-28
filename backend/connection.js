@@ -5,6 +5,7 @@ require("dotenv").config();
 // Keep your existing MySQL connection
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT || 3307,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
@@ -17,6 +18,7 @@ const sequelize = new Sequelize(
     process.env.DB_PASSWORD,
     {
         host: process.env.DB_HOST,
+        port: process.env.DB_PORT || 3307,
         dialect: "mysql",
     }
 );
