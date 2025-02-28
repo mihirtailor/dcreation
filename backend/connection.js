@@ -4,19 +4,19 @@ require("dotenv").config();
 
 // Keep your existing MySQL connection
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST || "localhost",
-    user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "root2024",
-    database: process.env.DB_NAME || "dcreation_db",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
 });
 
 // Add Sequelize instance using the same credentials
 const sequelize = new Sequelize(
-    process.env.DB_NAME || "dcreation_db",
-    process.env.DB_USER || "root",
-    process.env.DB_PASSWORD || "root2024",
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
-        host: process.env.DB_HOST || "localhost",
+        host: process.env.DB_HOST,
         dialect: "mysql",
     }
 );

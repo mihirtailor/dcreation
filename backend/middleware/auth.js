@@ -3,11 +3,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET || "thisismysecretkey";
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD =
-  "$2b$10$YtfljJEUTjcv1mGOPrJHhe6QKJKJfO3rM9GRtz6xEG0EieFucLA3m";
+const JWT_SECRET = process.env.JWT_SECRET;
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD_HASH;
 
+if (!JWT_SECRET || !ADMIN_USERNAME || !ADMIN_PASSWORD) {
+  console.error("Missing required environment variables for authentication");
+  process.exit(1);
+}
 // Middleware to verify the token
 function verifyUser(request, response, next) {
   const token = request.headers["authorization"];
