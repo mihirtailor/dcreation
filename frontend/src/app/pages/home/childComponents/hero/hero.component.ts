@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { SliderService } from '../../../../services/slider.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -16,13 +16,21 @@ export class HeroComponent implements OnInit, OnDestroy, AfterViewInit {
   private refreshInterval: any;
   isDataLoaded = false;
 
-  constructor(private sliderService: SliderService) { }
+  constructor(
+    private sliderService: SliderService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   ngOnInit() {
+    // Data fetching is safe on both server and browser
     this.sliderService.getSlides().subscribe(
       (slides) => {
         this.sliderItems = slides;
-        this.startImageRotation();
+
+        // Only start image rotation in browser context
+        if (isPlatformBrowser(this.platformId)) {
+          this.startImageRotation();
+        }
       },
       (error) => {
         console.error('Error loading slides:', error);
@@ -30,12 +38,14 @@ export class HeroComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-
   ngAfterViewInit() {
   }
 
   ngOnDestroy() {
-    clearInterval(this.refreshInterval);
+    // Safe cleanup regardless of platform
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
   }
 
   loadSlides() {

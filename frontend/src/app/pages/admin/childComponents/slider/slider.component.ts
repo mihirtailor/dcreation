@@ -29,15 +29,6 @@ export class SliderComponent implements OnInit {
 
   loadSlides() {
     this.sliderService.getSlides().subscribe((data) => {
-      console.log('Raw slides data:', data);
-      data.forEach((slide: any) => {
-        console.log('Individual slide:', {
-          id: slide.id,
-          imageUrl: slide.image_url,
-          title: slide.title,
-          description: slide.description,
-        });
-      });
       this.slides = data;
     });
   }

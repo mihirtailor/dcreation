@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration=production",
+    "build:ssr": "ng build --configuration=production && ng run frontend:server:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
@@ -42,6 +43,7 @@
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",
     "gsap": "^3.12.7",
+    "http-proxy-middleware": "^3.0.3",
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "ng-image-slider": "^10.0.0",

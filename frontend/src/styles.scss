@@ -1,5 +1,5 @@
-@import '@fontsource-variable/mona-sans';
-@import '@fontsource-variable/montserrat';
+@use '@fontsource-variable/mona-sans' as mona-sans;
+@use '@fontsource-variable/montserrat' as montserrat;
 
 // Design Tokens
 :root {

@@ -12,7 +12,10 @@ const { sequelize } = require("./connection");
 const app = express();
 
 const corsOptions = {
-    origin: ['http://localhost:4200'],
+    origin: ['http://localhost:4200',
+        'http://localhost:4000',
+        'https://dcreation-one.vercel.app',
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true

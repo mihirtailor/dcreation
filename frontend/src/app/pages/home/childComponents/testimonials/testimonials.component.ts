@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-testimonials',
@@ -48,8 +48,12 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
     },
   ];
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
   ngOnInit() {
-    this.startAutoSlide();
+    if (isPlatformBrowser(this.platformId)) {
+      this.startAutoSlide();
+    }
   }
 
   ngOnDestroy() {
@@ -74,8 +78,10 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
     this.updateVisibleTestimonials();
-    this.stopAutoSlide();
-    this.startAutoSlide();
+    if (isPlatformBrowser(this.platformId)) {
+      this.stopAutoSlide();
+      this.startAutoSlide();
+    }
   }
 
   previousSlide() {
@@ -83,8 +89,10 @@ export class TestimonialsComponent implements OnInit, OnDestroy {
       (this.currentIndex - 1 + this.testimonials.length) %
       this.testimonials.length;
     this.updateVisibleTestimonials();
-    this.stopAutoSlide();
-    this.startAutoSlide();
+    if (isPlatformBrowser(this.platformId)) {
+      this.stopAutoSlide();
+      this.startAutoSlide();
+    }
   }
 
   private updateVisibleTestimonials() {

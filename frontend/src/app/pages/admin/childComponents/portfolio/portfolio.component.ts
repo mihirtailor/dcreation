@@ -87,7 +87,6 @@ export class PortfolioAdminComponent implements OnInit {
     this.portfolioService.getCategories().subscribe({
       next: (categories) => {
         this.portfolioCategories = categories;
-        console.log('Available categories:', this.portfolioCategories.map(c => c.id));
       },
       error: (error) => {
         this.snackBar.open('Error loading categories', 'Close', {
@@ -186,7 +185,6 @@ export class PortfolioAdminComponent implements OnInit {
   loadPortfolioItems() {
     this.portfolioService.getAllPortfolios().subscribe({
       next: (items) => {
-        console.log('Portfolio items:', items);
         this.portfolioItems = items;
       },
       error: (error) => {

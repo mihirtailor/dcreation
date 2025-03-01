@@ -1,36 +1,30 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { trigger, transition, style, animate, state } from '@angular/animations';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'shared-contact-cta',
+  selector: 'app-contact-cta',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterLink],
   templateUrl: './contact-cta.component.html',
-  styleUrls: ['./contact-cta.component.scss'],
-  animations: [
-    trigger('fadeInUp', [
-      transition(':enter', [
-        style({ transform: 'translateY(40px)', opacity: 0 }),
-        animate('600ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
-      ])
-    ]),
-    trigger('bounce', [
-      state('*', style({ transform: 'translateY(0)' })),
-      transition('* => *', [
-        animate('300ms ease-in', style({ transform: 'translateY(-10px)' })),
-        animate('300ms ease-out', style({ transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
+  styleUrl: './contact-cta.component.scss'
 })
 export class ContactCtaComponent {
-  constructor(private router: Router) { }
 
-  navigateToContact() {
-    this.router.navigate(['/contact']).then(() => {
-      window.scrollTo(0, 0);
-    });
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+  scrollToTop() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  makePhoneCall() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.href = 'tel:+919925830109';
+    }
   }
 }

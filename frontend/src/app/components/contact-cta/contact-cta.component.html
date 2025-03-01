@@ -1,9 +1,30 @@
 <section class="contact-cta">
-    <div class="container text-center">
-        <h2 [@fadeInUp]>Ready to Start Your Project?</h2>
-        <p class="lead" [@fadeInUp]>Let's create something amazing together</p>
-        <button class="btn btn-primary btn-lg" (click)="navigateToContact()" [@bounce]>
-            Get in Touch <i class="fas fa-arrow-right ms-2"></i>
-        </button>
+    <div class="container">
+        <div class="cta-wrapper">
+            <div class="cta-content">
+                <h2 class="heading-2">
+                    Let's Create Something
+                    <span class="highlight">Amazing</span> Together
+                </h2>
+                <p class="body-text">
+                    Ready to transform your ideas into stunning visual reality? Our design
+                    team is here to bring your vision to life.
+                </p>
+                <div class="cta-buttons">
+                    <button class="primary-button" [routerLink]="['/contact']" (click)="scrollToTop()">
+                        <i class="bi bi-chat-dots-fill"></i>
+                        Start Your Project
+                    </button>
+                    <button class="secondary-button" (click)="makePhoneCall()">
+                        <i class="bi bi-telephone-fill"></i>
+                        Call Us Now
+                    </button>
+                </div>
+            </div>
+            <div class="cta-image">
+                <img src="https://res.cloudinary.com/dqfwg0the/image/upload/v1740612399/contact_cta_home5_bpsnex.jpg"
+                    alt="Design Illustration" class="featured-image" />
+            </div>
+        </div>
     </div>
 </section>

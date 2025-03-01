@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { ContactCtaComponent } from "../../components/contact-cta/contact-cta.component";
 import { CountUpModule } from 'ngx-countup';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactCtaComponent } from "../../components/contact-cta/contact-cta.component";
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [
     CommonModule,
-    ContactCtaComponent,
     CountUpModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    ContactCtaComponent
   ],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
