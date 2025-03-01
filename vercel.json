@@ -1,0 +1,22 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "frontend/package.json",
+            "use": "@vercel/node",
+            "config": {
+                "buildCommand": "cd frontend && ng build --configuration=production",
+                "outputDirectory": "frontend/dist/frontend"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/frontend/dist/frontend/server/main.js"
+        }
+    ]
+}
