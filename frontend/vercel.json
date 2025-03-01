@@ -2,8 +2,12 @@
     "version": 2,
     "builds": [
         {
-            "src": "dist/frontend/server/main.js",
-            "use": "@vercel/node"
+            "src": "package.json",
+            "use": "@vercel/node",
+            "config": {
+                "buildCommand": "ng build --configuration=production",
+                "outputDirectory": "dist/frontend"
+            }
         }
     ],
     "routes": [
