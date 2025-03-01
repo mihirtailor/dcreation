@@ -11,7 +11,14 @@ const { sequelize } = require("./connection");
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: ['http://localhost:4200'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Base route
@@ -30,7 +37,7 @@ app.use("/api", uploadRoutes);
 app.use("/api", contactRoutes);
 app.use("/api", servicesRoutes);
 app.use("/api", portfolioRoutes);
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 sequelize
     .sync()
