@@ -1,7 +1,7 @@
 {
     "version": 2,
     "framework": null,
-    "buildCommand": "npm run build:ssr",
+    "buildCommand": "npm run build:ssr && npm run postbuild:ssr",
     "outputDirectory": "dist/frontend/browser",
     "routes": [
         {
@@ -14,7 +14,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "/server.mjs"
+            "dest": "/server/main.js"
         }
     ]
 }
