@@ -16,5 +16,10 @@
             "src": "/(.*)",
             "dest": "/server/server.mjs"
         }
-    ]
+    ],
+    "functions": {
+        "server/server.mjs": {
+            "includeFiles": "dist/frontend/server/**"
+        }
+    }
 }
