@@ -3,18 +3,18 @@
     "framework": null,
     "buildCommand": "npm run build:ssr",
     "outputDirectory": "dist/frontend/browser",
-    "routes": [
+    "rewrites": [
         {
-            "src": "/assets/(.*)",
-            "dest": "/assets/$1"
+            "source": "/assets/(.*)",
+            "destination": "/assets/$1"
         },
         {
-            "src": "/(.*\\.(?:js|css|ico|json|webp|jpg|jpeg|png|svg|woff|woff2)$)",
-            "dest": "/$1"
+            "source": "/(.*\\.[a-z0-9]+$)",
+            "destination": "/$1"
         },
         {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
