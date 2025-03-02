@@ -5,8 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration=production",
-    "build:ssr": "ng build --configuration=production && ng run frontend:server:production",
-    "postbuild:ssr": "mkdir -p dist/frontend/browser/server && cp -r dist/frontend/server/* dist/frontend/browser/server/",
+    "build:ssr": "ng build --configuration=production && ng run frontend:server:production && mkdir -p dist/frontend/browser/server && cp -r dist/frontend/server/* dist/frontend/browser/server/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
